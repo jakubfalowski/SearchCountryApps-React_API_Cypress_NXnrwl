@@ -10,7 +10,7 @@ export function NxWelcome({ title }: { title: string }) {
       <div className="wrapper">
         <div className="container">
               <h1> Praktyki </h1>
-              <h3>Nazwa projektu {title} </h3>
+              <h3> Nazwa projektu {title} </h3>
         </div>
 
           

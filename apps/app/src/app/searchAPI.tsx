@@ -10,13 +10,13 @@ export const searchAPI = () => {
         {title: "Todo2"},
     ]);
     useEffect(() => {
-        fetch('https://www.googleapis.com/customsearch/v1?key=AIzaSyC9ntEwOZg7dixTbfbVOTLr3YNx6fvOI4g&cx=017576662512468239146:omuauf_lfve&q=poland')
+        fetch('/api/todos')
         .then((_) => _.json())
         .then(setTodos);
     }, []);
     
     function addTodo(){
-        fetch('https://www.googleapis.com/customsearch/v1?key=AIzaSyC9ntEwOZg7dixTbfbVOTLr3YNx6fvOI4g&cx=017576662512468239146:omuauf_lfve&q=poland',{
+        fetch('/api/addTodo',{
             method: 'POST',
             body: '',
         })

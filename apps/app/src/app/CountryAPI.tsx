@@ -1,5 +1,8 @@
+import path from "path";
 import React, {useState} from "react";
-const codeContinent = `AF`
+var pathname = window.location.pathname
+pathname = pathname.replace('/','');
+const codeContinent = pathname
 const COUNTRIES_QUERY = `
 {
   continent(code:"`+codeContinent+`"){
@@ -29,10 +32,10 @@ export default function CountryAPI(){
             <ul>  
             {/* {JSON.stringify(countries, null, 2)} */}
                 {countries.map(country => (
-                  <div>
-                    <h3>Państwo: {country.name}</h3>
-                    <span>Stolica: {country.capital}</span>
-                  </div>
+                  <ul>
+                    <li>Państwo: {country.name}</li>
+                    <li>Stolica: {country.capital === null ? '-' : country.capital }</li>
+                  </ul>
                 ))}
             </ul>
         </div>

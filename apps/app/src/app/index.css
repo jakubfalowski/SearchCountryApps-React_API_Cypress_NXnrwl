@@ -1,0 +1,12 @@
+body{
+    background-color:darkgray;
+}
+.buttonRow{
+    display: flex;
+    margin: 30px 0;
+    justify-content: space-between
+}
+ul{
+    list-style-type: none;
+    margin-bottom: 10px;
+}

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import './ContinentButton.css'
 
 class ContinentButton extends React.Component{
     render(){
-        return <a href=""><span>{this.props.continentCode} - {this.props.continent} </span></a>
+        return <span className={this.props.continentCode}><a href={this.props.continentCode}>{this.props.continentCode} - {this.props.continent} </a></span>
     }
 }
 

@@ -5,8 +5,6 @@ function CommentsPage(){
     const [comments, setComments] = useState([])
     const [query, setQuery] = useState('')
     let lackInfo = false;
-    console.log(query)
-    console.log(lackInfo)
     
     const fetchComments = async () => {
         const response = await fetch('https://www.googleapis.com/customsearch/v1?key=AIzaSyC9ntEwOZg7dixTbfbVOTLr3YNx6fvOI4g&cx=017576662512468239146:omuauf_lfve&q='+query)

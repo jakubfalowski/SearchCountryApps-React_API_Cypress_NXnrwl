@@ -1,20 +1,9 @@
-import { AppProps } from 'next/app';
-import Head from 'next/head';
 import './styles.css';
+import Search from './search.js'
 
-import {Header} from '@app/header'
-
-function CustomApp({ Component, pageProps }: AppProps) {
+function CustomApp() {
   return (
-    <>
-      <Header />
-      <Head>
-        <title>Welcome to app2!</title>
-      </Head>
-      <main className="app">
-        <Component {...pageProps} />
-      </main>
-    </>
+    <Search />
   );
 }
 

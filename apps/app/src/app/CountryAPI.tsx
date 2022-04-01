@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-
+const codeContinent = `AF`
 const COUNTRIES_QUERY = `
 {
-  continent(code:"EU"){
+  continent(code:"`+codeContinent+`"){
     code
     name
     countries{
@@ -26,7 +26,6 @@ export default function CountryAPI(){
     },[]);
     return(
         <div>
-            <h1> Country API </h1>
             <ul>  
             {/* {JSON.stringify(countries, null, 2)} */}
                 {countries.map(country => (

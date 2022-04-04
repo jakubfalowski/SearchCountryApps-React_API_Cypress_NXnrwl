@@ -6,6 +6,8 @@
     "app2": "apps/app2",
     "app2-e2e": "apps/app2-e2e",
     "header": "libs/header",
-    "header-e2e": "apps/header-e2e"
+    "header-e2e": "apps/header-e2e",
+    "search-google": "libs/search-google",
+    "select-countries": "libs/select-countries"
   }
 }

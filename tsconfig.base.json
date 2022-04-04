@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@app/header": ["libs/header/src/index.ts"]
+      "@app/header": ["libs/header/src/index.ts"],
+      "@app/search-google": ["libs/search-google/src/index.ts"],
+      "@app/select-countries": ["libs/select-countries/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

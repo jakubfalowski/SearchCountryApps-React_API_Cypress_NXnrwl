@@ -1,0 +1,23 @@
+{
+  "root": "libs/search-google",
+  "sourceRoot": "libs/search-google/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/search-google/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/search-google"],
+      "options": {
+        "jestConfig": "libs/search-google/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

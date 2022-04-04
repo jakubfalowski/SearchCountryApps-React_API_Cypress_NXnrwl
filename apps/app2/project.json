@@ -50,5 +50,5 @@
       }
     }
   },
-  "tags": ["scope: admin"]
+  "sourceTag": "scope:admin"
 }

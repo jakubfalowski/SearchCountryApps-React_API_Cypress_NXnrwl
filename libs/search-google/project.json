@@ -19,5 +19,7 @@
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "sourceTag": "scope:admin",
+  "notDependOnLibsWithTags": ["scope:client"]
 }

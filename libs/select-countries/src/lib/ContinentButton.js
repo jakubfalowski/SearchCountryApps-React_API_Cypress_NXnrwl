@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import './ContinentButton.css'
+import React from "react";
+import './index.css'
 
 class ContinentButton extends React.Component{
     render(){

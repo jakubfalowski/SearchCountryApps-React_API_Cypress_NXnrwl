@@ -1,13 +1,13 @@
-import styles from './select-countries.module.css';
+import CountryAPI from './CountryAPI';
+import ContinentButton from './ContinentButton';
+import './index.css'
 
-/* eslint-disable-next-line */
-export interface SelectCountriesProps {}
-
-export function SelectCountries(props: SelectCountriesProps) {
+export function SelectCountries() {
   return (
-    <div className={styles['container']}>
-      <h1>Welcome to SelectCountries!</h1>
-    </div>
+    <div>
+      <div className='buttonRow'><ContinentButton continent="Europe" continentCode="EU"/><ContinentButton continent="Africa" continentCode="AF"/><ContinentButton continent="South America" continentCode="SA"/><ContinentButton continent="North America" continentCode="NA"/><ContinentButton continent="Asia" continentCode="AS"/><ContinentButton continent="Oceania" continentCode="OC"/><ContinentButton continent="Antarctica" continentCode="AN"/></div>
+      <CountryAPI />
+      </div>
   );
 }
 

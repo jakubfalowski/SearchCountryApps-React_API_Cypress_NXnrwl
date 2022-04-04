@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-function CommentsPage(){
+export function GoogleAPI(){
     const [functionEnabled, enableFunction] = useState([])
     const [comments, setComments] = useState([])
     const [query, setQuery] = useState('')
@@ -26,4 +26,4 @@ function CommentsPage(){
         </div>    
     )
 }
-export default CommentsPage
+export default GoogleAPI

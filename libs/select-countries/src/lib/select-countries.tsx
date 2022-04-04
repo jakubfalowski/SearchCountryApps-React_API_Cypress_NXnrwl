@@ -1,6 +1,6 @@
 import CountryAPI from './CountryAPI';
 import ContinentButton from './ContinentButton';
-import './index.css'
+import './style.css'
 
 export function SelectCountries() {
   return (

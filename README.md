@@ -15,6 +15,6 @@
 14.Działać będziemy wg git flow - https://frontstack.pl/praca-z-git-git-flow/<br/>
 15.Zadania do wykonania będzie można wrzucać na trello.pl (możesz założyć tam przestrzeń - z templatką kanbana) i dodać mnie jako członka zespołu -  adam@febrit.co. <br/>
 
-<fix/feat/build/chore/ci/docs/style/refactor/perf/test>[opcjonalny dodatkowy opis - rzeczowniki]: <opis bezokolicznikowo>
-[opcjonalne opisanie zmian, które stworzyłem]
+<fix/feat/build/chore/ci/docs/style/refactor/perf/test>[opcjonalny dodatkowy opis - rzeczowniki]: <opis bezokolicznikowo> <br/>
+[opcjonalne opisanie zmian, które stworzyłem] <br/>
 [opcjonalna stopka]

@@ -8,6 +8,7 @@
     "header": "libs/header",
     "header-e2e": "apps/header-e2e",
     "search-google": "libs/search-google",
-    "select-countries": "libs/select-countries"
+    "select-countries": "libs/select-countries",
+    "web": "libs/web"
   }
 }

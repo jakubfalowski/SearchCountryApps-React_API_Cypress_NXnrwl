@@ -1,12 +1,15 @@
-import styles from './header.module.css';
-
 /* eslint-disable-next-line */
-export interface HeaderProps {}
+export interface HeaderProps {
+  api?: string;
+  nxname?: string;
+}
 
 export function Header(props: HeaderProps) {
   return (
-    <div className={styles['container']}>
-      <h1><b>Witaj w nowym Headerze</b></h1>
+    <div>
+      <h1><b>Praktyki Febrit - Jakub Fałowski</b></h1>
+      <h3>Projekt przy użyciu: {props.api}</h3>
+      <p> Nazwa apki w nxie: {props.nxname}</p>
     </div>
   );
 }

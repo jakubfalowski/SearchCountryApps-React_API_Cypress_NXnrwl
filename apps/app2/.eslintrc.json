@@ -20,9 +20,29 @@
     {
       "files": ["*.js", "*.jsx"],
       "rules": {}
+    },
+    "error",
+    {
+      "allow": [],
+      "depConstraints": [
+        {
+          "sourceTag": "scope:shared",
+          "onlyDependOnLibsWithTags": ["scope:shared"]
+        },
+        {
+          "sourceTag": "scope:admin",
+          "onlyDependOnLibsWithTags": ["scope:shared", "scope:admin"]
+        },
+        {
+          "sourceTag": "scope:client",
+          "onlyDependOnLibsWithTags": ["scope:shared", "scope:client"]
+        }
+      ]
     }
   ],
   "env": {
     "jest": true
-  }
+  },
+  
+  
 }

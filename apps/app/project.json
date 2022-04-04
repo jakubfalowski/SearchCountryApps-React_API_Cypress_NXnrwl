@@ -66,5 +66,5 @@
       }
     }
   },
-  "tags": ["scope: client"]
+  "sourceTag": "scope:client"
 }

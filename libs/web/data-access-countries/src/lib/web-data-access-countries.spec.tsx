@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import WebDataAccessCountries from './web-data-access-countries';
+import CountryAPI from './web-data-access-countries';
 
 describe('WebDataAccessCountries', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<WebDataAccessCountries />);
+    const { baseElement } = render(<CountryAPI />);
     expect(baseElement).toBeTruthy();
   });
 });

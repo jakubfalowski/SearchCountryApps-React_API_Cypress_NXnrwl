@@ -1,5 +1,5 @@
 import { Header } from '@app/header';
-import SearchGoogle from 'libs/search-google/src/lib/search-google';
+import { SearchGoogle } from '@app/web/data-access-google';
 import './style.css'
 
 function CustomApp() {

@@ -1,4 +1,4 @@
-import { Header } from '@app/header';
+import { Header } from '@app/web/ui-header';
 import { SearchGoogle } from '@app/web/data-access-google';
 import './style.css'
 

@@ -15,9 +15,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@app/header": ["libs/header/src/index.ts"],
-      "@app/search-google": ["libs/search-google/src/index.ts"],
-      "@app/select-countries": ["libs/select-countries/src/index.ts"],
       "@app/web": ["libs/web/src/index.ts"],
       "@app/web/data-access-countries": [
         "libs/web/data-access-countries/src/index.ts"

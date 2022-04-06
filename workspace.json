@@ -9,6 +9,9 @@
     "header-e2e": "apps/header-e2e",
     "search-google": "libs/search-google",
     "select-countries": "libs/select-countries",
-    "web": "libs/web"
+    "web": "libs/web",
+    "web-data-access-countries": "libs/web/data-access-countries",
+    "web-data-access-google": "libs/web/data-access-google",
+    "web-ui-header": "libs/web/ui-header"
   }
 }

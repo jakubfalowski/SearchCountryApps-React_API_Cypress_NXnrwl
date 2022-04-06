@@ -1,0 +1,23 @@
+{
+  "root": "libs/web/data-access-google",
+  "sourceRoot": "libs/web/data-access-google/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/web/data-access-google/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/data-access-google"],
+      "options": {
+        "jestConfig": "libs/web/data-access-google/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

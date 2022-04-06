@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
+
 var pathname = window.location.pathname;
 pathname = pathname.replace('/', '');
 const codeContinent = pathname;
@@ -19,7 +20,7 @@ const COUNTRIES_QUERY =
   `;
 
 export default function CountryAPI() {
-  const [countries, setCountries] = useState([] as any[]);
+  const [countries, setCountries] = useState([]);
 
   React.useEffect(() => {
     fetch('https://countries.trevorblades.com/graphql', {
@@ -32,6 +33,7 @@ export default function CountryAPI() {
   }, []);
   return (
     <div>
+      <h1>Welcome app</h1>
       <ul>
         {/* {JSON.stringify(countries, null, 2)} */}
         {countries.map((country) => (

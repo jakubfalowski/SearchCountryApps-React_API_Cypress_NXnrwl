@@ -1,4 +1,4 @@
-import { getGreeting } from '../support/app.po';
+import { getOwner } from '../support/app.po';
 
 describe('app', () => {
   beforeEach(() => cy.visit('/'));
@@ -8,6 +8,6 @@ describe('app', () => {
     cy.login('my-email@something.com', 'myPassword');
 
     // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome app');
+    getOwner().contains('Jakub Fałowski');
   });
 });

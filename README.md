@@ -1,4 +1,5 @@
 # Plan na praktyki<br/>
+
 1.Zapoznanie się z dokumentacją react.js<br/>
 2.Zapoznanie się z dokumentacją nx nrwl<br/>
 3.Stworzenie podstawowej przestrzeni dla aplikacji react w obrębie monorepo NXa (z użyciem generatorów CLI NXa)<br/>
@@ -13,4 +14,4 @@
 12.Implementacja testów integracyjnych (Cypress - https://www.cypress.io/)<br/>
 13Po każdym wykonanym featurze wystawiana będzie MRka (merge request) na gitlabie, do której będzie wykonywane CR (code review) z mojej strony.<br/>
 14.Działać będziemy wg git flow - https://frontstack.pl/praca-z-git-git-flow/<br/>
-15.Zadania do wykonania będzie można wrzucać na trello.pl (możesz założyć tam przestrzeń - z templatką kanbana) i dodać mnie jako członka zespołu -  adam@febrit.co
+15.Zadania do wykonania będzie można wrzucać na trello.pl (możesz założyć tam przestrzeń - z templatką kanbana) i dodać mnie jako członka zespołu - adam@febrit.co

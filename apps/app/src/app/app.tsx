@@ -4,9 +4,9 @@ import { Header } from '@app/web/ui-header';
 export function App() {
   return (
     <div>
-      <Header api='GraphQL - Country' nxname='app' />
+      <Header api="GraphQL - Country" nxname="app" />
       <SelectCountries />
-      </div>
+    </div>
   );
 }
 

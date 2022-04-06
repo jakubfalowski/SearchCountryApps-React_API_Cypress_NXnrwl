@@ -4,8 +4,8 @@ export function SearchGoogle() {
   return (
     <div>
       <GoogleAPI />
-      </div>
+    </div>
   );
 }
 
-export default SearchGoogle
+export default SearchGoogle;

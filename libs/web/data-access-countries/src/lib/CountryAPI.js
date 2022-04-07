@@ -38,8 +38,6 @@ export default function CountryAPI() {
     setCountries(results);
   }
 
-  if(pathname !== '') fetchData();
-
   return (
     <div>
       <ul>

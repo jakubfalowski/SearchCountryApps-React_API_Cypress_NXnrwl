@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 var pathname = window.location.pathname;
 pathname = pathname.replace('/', '');
 const codeContinent = pathname;
-
 const COUNTRIES_QUERY =
   `
 {
@@ -20,34 +19,28 @@ const COUNTRIES_QUERY =
 }
   `;
 
-const options = {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ query: COUNTRIES_QUERY }),
-};
-
 export default function CountryAPI() {
   const [countries, setCountries] = useState([]);
 
-  async function fetchData() {
-    const response = await fetch(
-      `https://countries.trevorblades.com/graphq`,options
-    );
-    const data = await response.json();
-    const results = data.data.continent.countries;
-    setCountries(results);
+  if(codeContinent !== ''){
+    React.useEffect(() => {
+      fetch('https://countries.trevorblades.com/graphql', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: COUNTRIES_QUERY }),
+      })
+        .then((response) => response.json())
+        .then((data) => setCountries(data.data.continent.countries));
+    }, []);
   }
-
   return (
     <div>
-      <ul>
-        {countries.map((country) => (
-          <ul>
+        {countries.map((country, i) => (
+          <ul key={i}>
             <li>Państwo: {country.name}</li>
             <li>Stolica: {country.capital === null ? '-' : country.capital}</li>
           </ul>
         ))}
-      </ul>
     </div>
   );
 }

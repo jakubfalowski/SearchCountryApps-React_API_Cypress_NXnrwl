@@ -33,9 +33,7 @@ export default function CountryAPI() {
   }, []);
   return (
     <div>
-      <h1>Welcome app</h1>
       <ul>
-        {/* {JSON.stringify(countries, null, 2)} */}
         {countries.map((country) => (
           <ul>
             <li>Państwo: {country.name}</li>

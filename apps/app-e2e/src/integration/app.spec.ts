@@ -1,13 +1,21 @@
-import { getOwner } from '../support/app.po';
+var continentCode = ['EU','AF','SA','NA','AS','OC','AN'];
 
-describe('app', () => {
-  beforeEach(() => cy.visit('/'));
+for(let i = 0; i < continentCode.length; i++){
+  describe(continentCode[i], () => {
+    beforeEach(() => cy.visit('/'+continentCode[i]));
 
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
+    it('Na stronie powinno być imie i nazwisko autora', () => {
+      // Custom command example, see `../support/commands.ts` file
+      cy.login('my-email@something.com', 'myPassword');
 
-    // Function helper example, see `../support/app.po.ts` file
-    getOwner().contains('Jakub Fałowski');
+      // Function helper example, see `../support/app.po.ts` file
+      cy.contains('Jakub Fałowski');
+    });
   });
-});
+
+    // it(`Czy w ${continentCode[i]} znajduje się Warszawa`, () => {
+    //   cy.contains('Warsaw');
+    // });
+
+  
+}

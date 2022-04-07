@@ -58,11 +58,6 @@
           }
         ]
       }
-    },
-    "husky": {
-      "hooks": {
-        "pre-commit": "echo \"[Husky] pre-commit\""
-      }
     }
   },
   "sourceTag": "scope:admin"

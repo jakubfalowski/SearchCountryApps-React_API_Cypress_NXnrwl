@@ -29,12 +29,6 @@ const options = {
 export default function CountryAPI() {
   const [countries, setCountries] = useState([]);
 
-  // React.useEffect(() => {
-  //   fetch('https://countries.trevorblades.com/graphql', )
-  //     .then((response) => response.json())
-  //     .then((data) => setCountries(data.data.continent.countries));
-  // }, []);
-
   async function fetchData() {
     const response = await fetch(
       `https://countries.trevorblades.com/graphq`,options
@@ -44,7 +38,7 @@ export default function CountryAPI() {
     setCountries(results);
   }
 
-  fetchData();
+  if(pathname !== '') fetchData();
 
   return (
     <div>

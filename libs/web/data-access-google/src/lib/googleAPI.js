@@ -18,8 +18,7 @@ export function GoogleAPI() {
   return (
     <div>
       <h3>
-        {' '}
-        Wpisz dane wyszukiwanie, by sprawdzić jak często zostało one wyświetlane{' '}
+        Wpisz dane wyszukiwanie, by sprawdzić jak często zostało one wyświetlane
       </h3>
       <input
         value={query}

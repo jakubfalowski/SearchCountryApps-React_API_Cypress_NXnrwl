@@ -6727,10 +6727,10 @@
   "resolved" "https://registry.npmjs.org/cyclist/-/cyclist-1.0.1.tgz"
   "version" "1.0.1"
 
-"cypress@^9.1.0", "cypress@>= 3 < 10":
-  "integrity" "sha512-gYiQYvJozMzDOriUV1rCt6CeRM/pRK4nhwGJj3nJQyX2BoUdTCVwp30xDMKc771HiNVhBtgj5o5/iBdVDVXQUg=="
-  "resolved" "https://registry.npmjs.org/cypress/-/cypress-9.5.2.tgz"
-  "version" "9.5.2"
+"cypress@^9.5.3", "cypress@>= 3 < 10":
+  "integrity" "sha512-ItelIVmqMTnKYbo1JrErhsGgQGjWOxCpHT1TfMvwnIXKXN/OSlPjEK7rbCLYDZhejQL99PmUqul7XORI24Ik0A=="
+  "resolved" "https://registry.npmjs.org/cypress/-/cypress-9.5.3.tgz"
+  "version" "9.5.3"
   dependencies:
     "@cypress/request" "^2.88.10"
     "@cypress/xvfb" "^1.2.4"
@@ -6764,7 +6764,7 @@
     "listr2" "^3.8.3"
     "lodash" "^4.17.21"
     "log-symbols" "^4.0.0"
-    "minimist" "^1.2.5"
+    "minimist" "^1.2.6"
     "ospath" "^1.2.2"
     "pretty-bytes" "^5.6.0"
     "proxy-from-env" "1.0.0"

@@ -3,15 +3,15 @@ import { render } from '@testing-library/react';
 import App from './app';
 
 describe('App', () => {
-  it('should render successfully', () => {
+  it('Powinno się wyrenderować', () => {
     const { baseElement } = render(<App />);
 
     expect(baseElement).toBeTruthy();
   });
 
-  it('should have a greeting as the title', () => {
+  it('Powinno być imie i nazwisko autora', () => {
     const { getByText } = render(<App />);
 
-    expect(getByText(/Welcome app/gi)).toBeTruthy();
+    expect(getByText(/Jakub Fałowski/)).toBeTruthy();
   });
 });

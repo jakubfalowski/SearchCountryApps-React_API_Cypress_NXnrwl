@@ -48,6 +48,21 @@
       "options": {
         "lintFilePatterns": ["apps/app2/**/*.{ts,tsx,js,jsx}"]
       }
+    },
+    "fadd": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "yarn format & git add -A ."
+          }
+        ]
+      }
+    },
+    "husky": {
+      "hooks": {
+        "pre-commit": "nx fadd"
+      }
     }
   },
   "sourceTag": "scope:admin"

@@ -69,7 +69,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "nx make"
     },
     "lint-staged": {
       "*": "yarn format && git add *"

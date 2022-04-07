@@ -1,5 +1,5 @@
 global.fetch = jest.fn(() =>
   Promise.resolve({
-    json: () => Promise.resolve({ name: "Polska", capital: "Warszawa" }),
+    json: () => Promise.resolve({ name: 'Polska', capital: 'Warszawa' }),
   })
 );

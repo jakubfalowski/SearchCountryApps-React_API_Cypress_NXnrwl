@@ -64,6 +64,16 @@
         "jestConfig": "apps/app/jest.config.js",
         "passWithNoTests": true
       }
+    },
+    "make": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "yarn format && git add *"
+          }
+        ]
+      }
     }
   },
   "sourceTag": "scope:client"

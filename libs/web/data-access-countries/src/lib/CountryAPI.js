@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 
 var pathname = window.location.pathname;
 pathname = pathname.replace('/', '');

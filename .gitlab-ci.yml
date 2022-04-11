@@ -5,7 +5,7 @@ build-job:
     - mkdir build/
     - echo "Build successful" > build/executable-binary-file-v1
     - cd build
-    - executable-binary-file-v1 
+    - cat executable-binary-file-v1 
 
 test-job1:
   stage: test

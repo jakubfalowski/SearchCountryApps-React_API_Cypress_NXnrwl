@@ -4,6 +4,8 @@ build-job:
     - echo "Hello, $GITLAB_USER_LOGIN!"
     - mkdir build/
     - echo "Build successful" > build/executable-binary-file-v1
+    - cd build
+    - executable-binary-file-v1 
 
 test-job1:
   stage: test

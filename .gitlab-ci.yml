@@ -1,4 +1,5 @@
 image: python:latest
+image: react
 build-job:
   stage: build
   script:

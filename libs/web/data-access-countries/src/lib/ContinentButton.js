@@ -1,9 +1,9 @@
 import React from 'react';
 
-class ContinentButton extends React.Component {
+export class ContinentButton extends React.Component {
   render() {
     return (
-      <span className={this.props.continentCode}>
+      <span className={this.props.continentCode} data-testid="button">
         <a href={this.props.continentCode}>
           {this.props.continentCode} - {this.props.continent}{' '}
         </a>

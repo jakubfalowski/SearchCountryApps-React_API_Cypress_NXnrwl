@@ -7,7 +7,9 @@
     "build": "nx build",
     "test": "nx test",
     "lint": "prettier --check .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepare": "husky install"
+
   },
   "private": true,
   "dependencies": {
@@ -71,4 +73,9 @@
       "pre-commit": "npm test"
     }
   }
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> 5a4a615... CI:test

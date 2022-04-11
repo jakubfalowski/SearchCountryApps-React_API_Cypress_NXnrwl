@@ -11,6 +11,7 @@ test-job1:
   stage: test
   script:
     - echo "This job tests something"
+    - pwd
   artifacts:
     paths:
       - $CI_PROJECT_DIR/build/executable-binary-file-v1

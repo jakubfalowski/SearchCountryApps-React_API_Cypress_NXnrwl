@@ -19,7 +19,6 @@ describe('App', () => {
     function sum(a, b) {
       return a + b;
     }
-    expect(sum(4, 6)).toBeGreaterThan(7)
+    expect(sum(4, 6)).toBeGreaterThan(7);
   });
-
 });

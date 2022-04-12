@@ -1,1 +1,1 @@
-export * from './lib/web-data-access-google';
+export * from './lib/SearchGoogle';

@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import SearchGoogle from './web-data-access-google';
+import SearchGoogle from './SearchGoogle';
 
 describe('WebDataAccessGoogle', () => {
   it('should render successfully', () => {

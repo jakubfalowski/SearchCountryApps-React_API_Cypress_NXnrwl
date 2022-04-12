@@ -4,13 +4,12 @@ export function GoogleAPI() {
   const [functionEnabled, enableFunction] = useState([]);
   const [comments, setComments] = useState([]);
   const [query, setQuery] = useState('');
+  const fetchURL =
+    'https://www.googleapis.com/customsearch/v1?key=AIzaSyC9ntEwOZg7dixTbfbVOTLr3YNx6fvOI4g&cx=017576662512468239146:omuauf_lfve&q=';
   let lackInfo = false;
 
   const fetchComments = async () => {
-    const response = await fetch(
-      'https://www.googleapis.com/customsearch/v1?key=AIzaSyC9ntEwOZg7dixTbfbVOTLr3YNx6fvOI4g&cx=017576662512468239146:omuauf_lfve&q=' +
-        query
-    );
+    const response = await fetch(fetchURL + query);
     const data = await response.json();
     setComments(data);
     enableFunction(true);

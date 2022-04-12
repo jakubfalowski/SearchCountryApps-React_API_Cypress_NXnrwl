@@ -1,2 +1,2 @@
-export * from './lib/web-data-access-countries';
-export * from './lib/ContinentButton.js'
+export * from './lib/SelectCountries';
+export * from './lib/ContinentButton';

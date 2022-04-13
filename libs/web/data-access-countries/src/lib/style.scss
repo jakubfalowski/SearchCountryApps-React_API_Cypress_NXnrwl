@@ -13,10 +13,10 @@ body {
       border: 1px black solid;
       border-radius: 50%;
       background-color: aliceblue;
-      &:hover{
+      &:hover {
         opacity: 90%;
-        &::after{
-          content: "!";
+        &::after {
+          content: '!';
         }
       }
     }
@@ -26,6 +26,3 @@ body {
     margin-bottom: 10px;
   }
 }
-
-
-

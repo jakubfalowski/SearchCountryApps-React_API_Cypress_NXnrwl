@@ -16,7 +16,6 @@
         "polyfills": "apps/app/src/polyfills.ts",
         "tsConfig": "apps/app/tsconfig.app.json",
         "assets": ["apps/app/src/favicon.ico", "apps/app/src/assets"],
-        "styles": ["apps/app/src/styles.scss"],
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"
       },
@@ -65,7 +64,7 @@
         "passWithNoTests": true
       }
     },
-    "make": {
+    "fadd": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
         "commands": [

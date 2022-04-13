@@ -1,17 +1,17 @@
 import { useState } from 'react';
 
 export function GoogleAPI() {
-  const [functionEnabled, enableFunction] = useState([]);
-  const [comments, setComments] = useState([]);
+  const [functionEnabled, enableFunction] = useState(false);
+  const [results, setResults] = useState([] as any);
   const [query, setQuery] = useState('');
   const fetchURL =
     'https://www.googleapis.com/customsearch/v1?key=AIzaSyC9ntEwOZg7dixTbfbVOTLr3YNx6fvOI4g&cx=017576662512468239146:omuauf_lfve&q=';
   let lackInfo = false;
 
-  const fetchComments = async () => {
+  const fetchResults = async () => {
     const response = await fetch(fetchURL + query);
     const data = await response.json();
-    setComments(data);
+    setResults(data);
     enableFunction(true);
   };
   return (
@@ -25,11 +25,11 @@ export function GoogleAPI() {
         placeholder="google"
         onChange={(e) => setQuery(e.target.value)}
       />
-      <button onClick={fetchComments}> Wyświetl</button>
+      <button onClick={fetchResults}> Wyświetl</button>
       {functionEnabled === true ? (
-        comments.queries.request.map((item, i) => {
+        results.queries.request.map((item: any, i: number) => {
           return (
-            <div key={i}>
+            <div key={item.searchTerms+i}>
               <h3>Wyszukiwane hasło: {item.searchTerms}</h3>
               <span>
                 Liczba wyszukań:{' '}
@@ -44,9 +44,9 @@ export function GoogleAPI() {
         <p> Musisz wpisać dowolną wartość </p>
       )}
       {functionEnabled === true && lackInfo === false
-        ? comments.items.map((item, i) => {
+        ? results.items.map((item: any, i: number) => {
             return (
-              <div key={i}>
+              <div key={item.cacheId+i}>
                 <h3>
                   Tytuł: <a href={item.link}> {item.title}</a>
                 </h3>

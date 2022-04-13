@@ -1,11 +1,7 @@
 import GoogleAPI from './googleAPI';
 
 export function SearchGoogle() {
-  return (
-    <div>
-      <GoogleAPI />
-    </div>
-  );
+  return <GoogleAPI />
 }
 
 export default SearchGoogle;

@@ -1,6 +1,6 @@
 import CountryAPI from './CountryAPI';
 import ContinentButton from './ContinentButton';
-import './style.css';
+import './style.scss';
 
 export function SelectCountries() {
   const continents = [

@@ -73,7 +73,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "prettier ."
+      "pre-commit": "nx test"
     },
     "lint-staged": {
       "*": "yarn format && git add *"

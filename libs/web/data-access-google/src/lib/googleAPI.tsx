@@ -29,7 +29,7 @@ export function GoogleAPI() {
       {functionEnabled === true ? (
         results.queries.request.map((item: any, i: number) => {
           return (
-            <div key={item.searchTerms+i}>
+            <div key={item.searchTerms + i}>
               <h3>Wyszukiwane hasło: {item.searchTerms}</h3>
               <span>
                 Liczba wyszukań:{' '}
@@ -46,11 +46,11 @@ export function GoogleAPI() {
       {functionEnabled === true && lackInfo === false
         ? results.items.map((item: any, i: number) => {
             return (
-              <div key={item.cacheId+i}>
+              <div key={item.cacheId + i}>
                 <h3>
                   Tytuł: <a href={item.link}> {item.title}</a>
                 </h3>
-                 </div>
+              </div>
             );
           })
         : ''}
@@ -58,4 +58,3 @@ export function GoogleAPI() {
   );
 }
 export default GoogleAPI;
-

@@ -37,7 +37,7 @@ export function SelectCountries() {
   return (
     <>
       <div className="buttonRow">
-        {continents.map(continent => (
+        {continents.map((continent) => (
           <ContinentButton
             key={continent.continentCode}
             continent={continent.continent}

@@ -9,12 +9,12 @@ build-job:
   artifacts:
     paths:
       - build/executable-binary-file-v1
-  
+
 test-job1:
   stage: test
   script:
     - echo "This job tests something"
-    - cat $CI_PROJECT_DIR/build/executable-binary-file-v1 
+    - cat $CI_PROJECT_DIR/build/executable-binary-file-v1
 
 test-job2:
   stage: test

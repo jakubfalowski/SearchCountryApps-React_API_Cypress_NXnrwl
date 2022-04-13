@@ -1,7 +1,7 @@
 import GoogleAPI from './googleAPI';
 
 export function SearchGoogle() {
-  return <GoogleAPI />
+  return <GoogleAPI />;
 }
 
 export default SearchGoogle;

@@ -1,4 +1,4 @@
-import { SelectCountries } from '@app/web/data-access-countries';
+import { SelectContinents } from '@app/web/data-access-countries';
 import { Header } from '@app/web/ui-header';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ export function App() {
           element={
             <>
               <Header api="GraphQL - Country" nxname="app" />
-              <SelectCountries />
+              <SelectContinents />
             </>
           }
         />
@@ -20,7 +20,7 @@ export function App() {
           element={
             <>
               <Header api="GraphQL - Country" nxname="app" />
-              <SelectCountries />
+              <SelectContinents />
             </>
           }
         />

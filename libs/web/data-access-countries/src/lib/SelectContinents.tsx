@@ -1,8 +1,8 @@
-import CountryAPI from './CountryAPI';
+import FetchCountry from './FetchCountry';
 import ContinentButton from './ContinentButton';
 import './style.scss';
 
-export function SelectCountries() {
+export function SelectContinents() {
   const continents = [
     {
       continent: 'Europe',
@@ -45,9 +45,7 @@ export function SelectCountries() {
           />
         ))}
       </div>
-      <CountryAPI />
+      <FetchCountry />
     </>
   );
 }
-
-export default SelectCountries;

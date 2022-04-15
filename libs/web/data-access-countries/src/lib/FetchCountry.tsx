@@ -1,10 +1,13 @@
-import mitt from 'next/dist/shared/lib/mitt';
+import { continents } from './ContinentsList';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 export default function CountryAPI() {
   const [countries, setCountries] = useState([] as any[]);
-  const [order, setOrder] = useState("");
+  const [order, setOrder] = useState(String);
+  const [cc, setcc] = useState(String);
+  const [amountCountries, setAmountCountries] = useState(Number)
+  const [userCountries, setUserCountries] = useState(Number)
   const { codeContinent } = useParams();
   const COUNTRIES_QUERY = `{
     continent(code:"${codeContinent}"){
@@ -32,11 +35,12 @@ export default function CountryAPI() {
         const response = await fetch(fetchURL + COUNTRIES_QUERY, options);
         const data = await response.json();
         setCountries(data.data.continent.countries)
+        setAmountCountries(countries.length)
     } catch (err) {
         console.error(err);
     }
   }
-  if (codeContinent !== '' && order === "") fetchData()
+  if (codeContinent !== '' && order === "") fetchData();
 
     const sorting = (col :any) => {
     if(order === "") setOrder("ASC");
@@ -47,7 +51,6 @@ export default function CountryAPI() {
       setCountries(sorted);
       setOrder("DSC");
     }
-
   
   if(order === "DSC"){
     const sorted = [...countries].sort((a,b)=>
@@ -56,10 +59,21 @@ export default function CountryAPI() {
     setCountries(sorted);
     setOrder("ASC");
   }
-  
 }
   return (
+    
     <div>
+      <div>
+        <span> Pokaż:
+          <input type="number" min="1" max={amountCountries} placeholder={amountCountries+""} value={userCountries} onChange={(e) => setUserCountries(e.target.valueAsNumber)}/> krotek.
+        </span>
+        <select onChange={(e) => setcc(e.target.value)}>
+        {continents.map(continent => (
+          <option key={continent.continentCode} value={continent.continentCode}>{continent.continent}</option>
+        ))}
+        </select>
+        <a href={cc+""}><button> Wyślij </button></a>
+      </div>
       <table>
         <tbody>
           <tr>
@@ -71,7 +85,7 @@ export default function CountryAPI() {
             <th onClick={()=>sorting("phone")}>Telefon</th>
           </tr>
         </tbody>
-      {countries.map(country => (
+      {countries.slice(0, 10).map(country => (
         <tr key={country.code}>
           <td>{country.name}</td>
           <td>{country.native}</td>

@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm test app && npm test app2
+# npm test app --verbose && npm test app2 --verbose

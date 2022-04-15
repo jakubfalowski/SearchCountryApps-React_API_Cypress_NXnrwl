@@ -1,6 +1,7 @@
-$bgColor: darkgray;
+@import '../../../global.scss';
 body {
-  background-color: $bgColor;
+  background-color: $countryBgColor;
+  color: white;
   .buttonRow {
     display: flex;
     margin: 30px 0;
@@ -21,8 +22,14 @@ body {
       }
     }
   }
-  ul {
-    list-style-type: none;
-    margin-bottom: 10px;
+  table{
+    width: 100%;
+    text-align: center;
+    tr{
+      height: 64px;
+      &:nth-child(even){
+        background-color: $strapColor;
+      }
+    }
   }
 }

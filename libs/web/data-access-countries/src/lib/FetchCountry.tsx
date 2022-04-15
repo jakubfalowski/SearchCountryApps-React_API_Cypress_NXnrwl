@@ -78,7 +78,7 @@ export default function CountryAPI() {
           <td>{country.code}</td>
           <td>{country.capital === null ? '-' : country.capital}</td>
           <td>{country.currency === null ? '-' : country.currency}</td>
-          <td>{country.phone}</td>
+          <td>+{country.phone}</td>
         </tr>
       ))}
       </table>

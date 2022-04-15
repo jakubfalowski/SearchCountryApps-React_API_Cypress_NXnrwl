@@ -19,7 +19,6 @@ export function App() {
           path={'/:codeContinent'}
           element={
             <>
-              <Header api="GraphQL - Country" nxname="app" />
               <SelectContinents />
             </>
           }

@@ -1,38 +1,30 @@
 import { continents } from './ContinentsList';
 import React, { useState } from 'react';
+import {COUNTRIES_QUERY} from './ContinentsQuery'
 import { useParams } from 'react-router-dom';
 
-export default function CountryAPI() {
+
+
+export default function FetchCountry() {
+
+  
+  const { codeContinent } = useParams();
   const [countries, setCountries] = useState([] as any[]);
   const [order, setOrder] = useState(String);
   const [cc, setcc] = useState(String);
   const [amountCountries, setAmountCountries] = useState(Number)
   const [userCountries, setUserCountries] = useState(Number)
-  const { codeContinent } = useParams();
-  const COUNTRIES_QUERY = `{
-    continent(code:"${codeContinent}"){
-      code
-      name
-      countries{
-        name
-        native
-        code
-        capital
-        currency
-        phone
-      }
-    }
-  }`;
+
   const fetchURL = 'https://countries.trevorblades.com/graphql';
   const options = {
     method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: COUNTRIES_QUERY }),
+        body: JSON.stringify({ query: COUNTRIES_QUERY(codeContinent) }),
     }
 
   const fetchData = async () => {
     try {
-        const response = await fetch(fetchURL + COUNTRIES_QUERY, options);
+        const response = await fetch(fetchURL + COUNTRIES_QUERY(codeContinent), options);
         const data = await response.json();
         setCountries(data.data.continent.countries)
         setAmountCountries(countries.length)
@@ -40,7 +32,8 @@ export default function CountryAPI() {
         console.error(err);
     }
   }
-  if (codeContinent !== '' && order === "") fetchData();
+
+  fetchData()
 
     const sorting = (col :any) => {
     if(order === "") setOrder("ASC");

@@ -1,5 +1,9 @@
 export const continents = [
     {
+      continent: '-',
+      continentCode: '',
+    },
+    {
       continent: 'Europe',
       continentCode: 'EU',
     },

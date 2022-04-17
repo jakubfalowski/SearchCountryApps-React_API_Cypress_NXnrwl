@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import {COUNTRIES_QUERY} from './ContinentsQuery'
-import { useParams } from 'react-router-dom';
 import SelectCountries from './SelectCountries';
 import { continents } from './ContinentsList';
 import { Sorting } from './Soritng';
@@ -9,8 +8,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function FetchCountry() {
 
-  
-  const { codeContinent } = useParams();
+
   const [countries, setCountries] = useState([] as any[]);
   const [cc, setcc] = useState(String);
   const [amountCountries, setAmountCountries] = useState(Number)
@@ -22,7 +20,7 @@ export default function FetchCountry() {
   const options = {
     method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: COUNTRIES_QUERY(codeContinent) }),
+        body: JSON.stringify({ query: COUNTRIES_QUERY(cc) }),
     }
 
   const fetchData = async () => {
@@ -53,21 +51,10 @@ export default function FetchCountry() {
               <th onClick={()=>Sorting("code", countries)}>Kod</th>
               <th onClick={()=>Sorting("capital", countries)}>Stolica</th>
               <th onClick={()=>Sorting("currency", countries)}>Waluta</th>
+              <th onClick={()=>Sorting("number", countries)}>Telefon</th>
             </tr>
           </thead>
-          {countries.slice(0, 10).map(country => (
-            <tbody>
-            <tr key={country.code}>
-                <td>{country.name}</td>
-                <td>{country.native}</td>
-                <td>{country.code}</td>
-                <td>{country.capital === null ? '-' : country.capital}</td>
-                <td>{country.currency === null ? '-' : country.currency}</td>
-                <td>+{country.phone}</td>
-            </tr>
-            </tbody>
-        ))}
-            {/* {SelectCountries(countries)} */}
+            {SelectCountries(countries)}
         </table>
         </div>);
   // console.log(Sorting("currency", countries));

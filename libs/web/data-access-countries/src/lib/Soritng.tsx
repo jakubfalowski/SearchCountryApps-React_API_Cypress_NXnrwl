@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import FetchCountry from "./FetchCountry";
+import SelectCountries from "./SelectCountries";
 
 export const Sorting = (col :any, countries: any[]) => {
 
@@ -12,6 +13,7 @@ export const Sorting = (col :any, countries: any[]) => {
       );
       setListCountries(sorted);
       setOrder("DSC");
+      // SelectCountries(listCountries)
     }
   
   if(order === "DSC"){
@@ -20,5 +22,6 @@ export const Sorting = (col :any, countries: any[]) => {
     );
     setListCountries(sorted);
     setOrder("ASC");
+    // SelectCountries(listCountries)
   }
 }

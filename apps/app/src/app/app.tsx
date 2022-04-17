@@ -5,10 +5,7 @@ export function App() {
   return (
     <Router>
       <Routes>
-        <Route
-          path={'*'}
-          element={<CountryApp />}
-        />
+        <Route path={'*'} element={<CountryApp />} />
       </Routes>
     </Router>
   );

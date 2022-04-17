@@ -1,5 +1,5 @@
-export const ContinentsQuery = (codeContinent: any) => `{
-    continent(code:"${codeContinent}"){
+export const ContinentsQueryAll = `{
+    continents{
       code
       name
       countries{

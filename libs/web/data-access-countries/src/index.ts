@@ -1,1 +1,1 @@
-export * from './lib/CountryApp'
+export * from './lib/CountryApp';

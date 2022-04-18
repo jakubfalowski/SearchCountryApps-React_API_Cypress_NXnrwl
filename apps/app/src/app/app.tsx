@@ -5,7 +5,8 @@ export function App() {
   return (
     <Router>
       <Routes>
-        <Route path={'*'} element={<CountryApp />} />
+        <Route path={'/'} element={<CountryApp />} />
+        <Route path={'/:page'} element={<CountryApp />} />
       </Routes>
     </Router>
   );

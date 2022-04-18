@@ -1,10 +1,11 @@
 export default function SelectCountries(
   countries: any[],
-  userCountries: number
+  userCountries: number,
+  page: any
 ) {
   return (
     <tbody>
-      {countries.slice(0, userCountries).map((country) => (
+      {countries.slice(userCountries*(page-1), userCountries*page).map((country) => (
         <tr key={country.code}>
           <td>{country.name}</td>
           <td>{country.native}</td>

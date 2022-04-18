@@ -3,15 +3,17 @@ import { ContinentsQuery } from './ContinentsQuery';
 import { ContinentsQueryAll } from './ContinentsQueryAll';
 import SelectCountries from './SelectCountries';
 import { continents } from './ContinentsList';
+import { useParams } from 'react-router-dom';
 
 export default function FetchCountry() {
   const [countries, setCountries] = useState([] as any[]);
   const [cc, setcc] = useState(String);
   const [amountCountries, setAmountCountries] = useState(Number);
-  let [userCountries, setUserCountries] = useState(1);
+  let [userCountries, setUserCountries] = useState(5);
   const [order, setOrder] = useState('ASC');
   const [listCountries, setListCountries] = useState([] as any[]);
   const [sort, setSort] = useState(false);
+  let { page } = useParams();
 
   const fetchURL = 'https://countries.trevorblades.com/graphql';
   const options = {
@@ -46,7 +48,14 @@ export default function FetchCountry() {
       setOrder('ASC');
     }
   };
+
   if (userCountries > amountCountries) userCountries = amountCountries;
+
+  let amountPages = amountCountries%userCountries===0 ? Math.floor(amountCountries/userCountries) : Math.floor(amountCountries/userCountries)+1;
+  let pagesTab = [];
+  for(let i = 0; i < amountPages;i++) pagesTab[i] = i+1;
+  if(page === undefined) page = '1';
+
   return (
     <div>
       <div>
@@ -55,7 +64,7 @@ export default function FetchCountry() {
           Pokaż:
           <input
             type="number"
-            min="1"
+            min="5"
             max={amountCountries}
             value={userCountries}
             onChange={(e) => setUserCountries(e.target.valueAsNumber)}
@@ -88,9 +97,12 @@ export default function FetchCountry() {
           </tr>
         </thead>
         {sort
-          ? SelectCountries(listCountries, userCountries)
-          : SelectCountries(countries, userCountries)}
+          ? SelectCountries(listCountries, userCountries, page)
+          : SelectCountries(countries, userCountries, page)}
       </table>
+      {pagesTab.map((pageNumber) => (
+            <a href={"/"+pageNumber} key={pageNumber}> {pageNumber} </a>
+          ))}
     </div>
   );
 }

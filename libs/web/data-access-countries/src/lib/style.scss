@@ -9,24 +9,12 @@ body {
       margin: 0 10px;
     }
   }
-  .buttonRow {
-    display: flex;
-    margin: 30px 0;
-    justify-content: space-between;
-  }
-  form {
-    height: 64px;
-  }
   table {
     width: 100%;
     text-align: center;
     th:active {
       background-color: $strapColor;
       border-color: $strapColor;
-    }
-    td,
-    th {
-      width: 16%;
     }
     tr {
       height: 64px;

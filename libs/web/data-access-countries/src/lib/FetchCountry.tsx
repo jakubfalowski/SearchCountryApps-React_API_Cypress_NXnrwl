@@ -4,11 +4,11 @@ import { ContinentsQueryAll } from './ContinentsQueryAll';
 import SelectCountries from './SelectCountries';
 import { continents } from './ContinentsList';
 import { useParams, useNavigate } from 'react-router-dom';
-import { BiChevronDown, BiChevronUp } from "react-icons/bi";
+import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 
 export default function FetchCountry() {
   const [countries, setCountries] = useState([] as any[]);
-  const [cc, setcc] = useState(String);
+  const [continentCode, setContinentCode] = useState(String);
   const [amountCountries, setAmountCountries] = useState(Number);
   let [userCountries, setUserCountries] = useState(5);
   const [order, setOrder] = useState('ASC');
@@ -21,12 +21,15 @@ export default function FetchCountry() {
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ query: ContinentsQuery(cc) }),
+    body: JSON.stringify({ query: ContinentsQuery(continentCode) }),
   };
 
-  const fetchData = async (pageNumber :any) => {
-    navigate(`/${cc}/${pageNumber}`);
-    const response = await fetch(fetchURL + ContinentsQuery(cc), options);
+  const fetchData = async (pageNumber: any) => {
+    navigate(`/${continentCode}/${pageNumber}`);
+    const response = await fetch(
+      fetchURL + ContinentsQuery(continentCode),
+      options
+    );
     const data = await response.json();
     setCountries(data.data.continent.countries);
     setAmountCountries(data.data.continent.countries.length);
@@ -54,14 +57,17 @@ export default function FetchCountry() {
 
   if (userCountries > amountCountries) userCountries = amountCountries;
 
-  let amountPages = amountCountries%userCountries===0 ? Math.floor(amountCountries/userCountries) : Math.floor(amountCountries/userCountries)+1;
+  let amountPages =
+    amountCountries % userCountries === 0
+      ? Math.floor(amountCountries / userCountries)
+      : Math.floor(amountCountries / userCountries) + 1;
   let pagesTab = [];
-  for(let i = 0; i < amountPages;i++) pagesTab[i] = i+1;
-  if(page === undefined) page = '1';
+  for (let i = 0; i < amountPages; i++) pagesTab[i] = i + 1;
+  if (page === undefined) page = '1';
 
   return (
     <div>
-      <div className='header'>
+      <div className="header">
         <span>
           {' '}
           Pokaż:
@@ -74,7 +80,7 @@ export default function FetchCountry() {
           />{' '}
           {userCountries}/{amountCountries} krotek
         </span>
-        <select onChange={(e) => setcc(e.target.value)}>
+        <select onChange={(e) => setContinentCode(e.target.value)}>
           {continents.map((continent) => (
             <option
               key={continent.continentCode}
@@ -89,23 +95,40 @@ export default function FetchCountry() {
       <table>
         <thead>
           <tr>
-            <th onClick={() => Sorting('name', countries)}>Kraj {order === "ASC" ? <BiChevronUp/> : <BiChevronDown />} </th>
-            <th onClick={() => Sorting('native', countries)}>
-              Nazwa kraju w ich języku {order === "ASC" ? <BiChevronUp/> : <BiChevronDown />}
+            <th onClick={() => Sorting('name', countries)}>
+              Kraj {order === 'ASC' ? <BiChevronUp /> : <BiChevronDown />}{' '}
             </th>
-            <th onClick={() => Sorting('code', countries)}>Kod {order === "ASC" ? <BiChevronUp/> : <BiChevronDown />} </th>
-            <th onClick={() => Sorting('capital', countries)}>Stolica {order === "ASC" ? <BiChevronUp/> : <BiChevronDown />} </th>
-            <th onClick={() => Sorting('currency', countries)}>Waluta {order === "ASC" ? <BiChevronUp/> : <BiChevronDown />} </th>
-            <th onClick={() => Sorting('phone', countries)}>Telefon {order === "ASC" ? <BiChevronUp/> : <BiChevronDown />} </th>
+            <th onClick={() => Sorting('native', countries)}>
+              Nazwa kraju w ich języku{' '}
+              {order === 'ASC' ? <BiChevronUp /> : <BiChevronDown />}
+            </th>
+            <th onClick={() => Sorting('code', countries)}>
+              Kod {order === 'ASC' ? <BiChevronUp /> : <BiChevronDown />}{' '}
+            </th>
+            <th onClick={() => Sorting('capital', countries)}>
+              Stolica {order === 'ASC' ? <BiChevronUp /> : <BiChevronDown />}{' '}
+            </th>
+            <th onClick={() => Sorting('currency', countries)}>
+              Waluta {order === 'ASC' ? <BiChevronUp /> : <BiChevronDown />}{' '}
+            </th>
+            <th onClick={() => Sorting('phone', countries)}>
+              Telefon {order === 'ASC' ? <BiChevronUp /> : <BiChevronDown />}{' '}
+            </th>
           </tr>
         </thead>
         {sort
           ? SelectCountries(listCountries, userCountries, page)
           : SelectCountries(countries, userCountries, page)}
       </table>
-      <div className='selectPages'>
+      <div className="selectPages">
         {pagesTab.map((pageNumber) => (
-          <button className="numberPage" onClick={() => fetchData(pageNumber)}>{pageNumber}</button>
+          <button
+            key={pageNumber}
+            className="numberPage"
+            onClick={() => fetchData(pageNumber)}
+          >
+            {pageNumber}
+          </button>
         ))}
       </div>
     </div>

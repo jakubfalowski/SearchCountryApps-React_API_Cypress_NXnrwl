@@ -69,7 +69,7 @@
       "options": {
         "commands": [
           {
-            "command": "yarn format && git add *"
+            "command": "yarn format && git add * && git commit -m \"styles: prettier\""
           }
         ]
       }

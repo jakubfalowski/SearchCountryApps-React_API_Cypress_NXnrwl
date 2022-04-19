@@ -2,10 +2,10 @@
 body {
   background-color: $countryBgColor;
   color: white;
-  div.header{
+  div.header {
     display: flex;
     justify-content: center;
-    & *:not(button){
+    & *:not(button) {
       margin: 0 10px;
     }
   }
@@ -35,16 +35,16 @@ body {
       }
     }
   }
-  div.selectPages{
+  div.selectPages {
     display: flex;
     justify-content: center;
-    button.numberPage{
+    button.numberPage {
       background-color: $countryBgColor;
       color: white;
       height: 31px;
       width: 31px;
       margin: 5px;
-      &:hover{
+      &:hover {
         background-color: $hover;
       }
     }

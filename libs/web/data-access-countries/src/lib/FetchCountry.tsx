@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+
 import { ContinentsQuery } from './ContinentsQuery';
 import SelectCountries from './SelectCountries';
 import { continents } from './ContinentsList';
-import { useParams, useNavigate } from 'react-router-dom';
+
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 
 export default function FetchCountry() {
@@ -23,7 +25,7 @@ export default function FetchCountry() {
     body: JSON.stringify({ query: ContinentsQuery(continentCode) }),
   };
 
-  const fetchData = async (pageNumber: any) => {
+  const fetchData = async (pageNumber: String | Number) => {
     navigate(`/${continentCode}/${pageNumber}`);
     const response = await fetch(
       fetchURL + ContinentsQuery(continentCode),

@@ -3,7 +3,8 @@ import { ContinentsQuery } from './ContinentsQuery';
 import { ContinentsQueryAll } from './ContinentsQueryAll';
 import SelectCountries from './SelectCountries';
 import { continents } from './ContinentsList';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 
 export default function FetchCountry() {
   const [countries, setCountries] = useState([] as any[]);
@@ -15,6 +16,7 @@ export default function FetchCountry() {
   const [sort, setSort] = useState(false);
   let { page } = useParams();
 
+  const navigate = useNavigate();
   const fetchURL = 'https://countries.trevorblades.com/graphql';
   const options = {
     method: 'POST',
@@ -22,7 +24,8 @@ export default function FetchCountry() {
     body: JSON.stringify({ query: ContinentsQuery(cc) }),
   };
 
-  const fetchData = async () => {
+  const fetchData = async (pageNumber :any) => {
+    navigate(`/${cc}/${pageNumber}`);
     const response = await fetch(fetchURL + ContinentsQuery(cc), options);
     const data = await response.json();
     setCountries(data.data.continent.countries);
@@ -58,7 +61,7 @@ export default function FetchCountry() {
 
   return (
     <div>
-      <div>
+      <div className='header'>
         <span>
           {' '}
           Pokaż:
@@ -69,7 +72,7 @@ export default function FetchCountry() {
             value={userCountries}
             onChange={(e) => setUserCountries(e.target.valueAsNumber)}
           />{' '}
-          {userCountries}/{amountCountries} krotek.
+          {userCountries}/{amountCountries} krotek
         </span>
         <select onChange={(e) => setcc(e.target.value)}>
           {continents.map((continent) => (
@@ -81,28 +84,30 @@ export default function FetchCountry() {
             </option>
           ))}
         </select>
-        <button onClick={fetchData}> Wyślij </button>
+        <button onClick={() => fetchData(1)}> Wyślij </button>
       </div>
       <table>
         <thead>
           <tr>
-            <th onClick={() => Sorting('name', countries)}>Kraj</th>
+            <th onClick={() => Sorting('name', countries)}>Kraj {order === "ASC" ? <BiChevronUp/> : <BiChevronDown />} </th>
             <th onClick={() => Sorting('native', countries)}>
-              Nazwa kraju w ich języku
+              Nazwa kraju w ich języku {order === "ASC" ? <BiChevronUp/> : <BiChevronDown />}
             </th>
-            <th onClick={() => Sorting('code', countries)}>Kod</th>
-            <th onClick={() => Sorting('capital', countries)}>Stolica</th>
-            <th onClick={() => Sorting('currency', countries)}>Waluta</th>
-            <th onClick={() => Sorting('phone', countries)}>Telefon</th>
+            <th onClick={() => Sorting('code', countries)}>Kod {order === "ASC" ? <BiChevronUp/> : <BiChevronDown />} </th>
+            <th onClick={() => Sorting('capital', countries)}>Stolica {order === "ASC" ? <BiChevronUp/> : <BiChevronDown />} </th>
+            <th onClick={() => Sorting('currency', countries)}>Waluta {order === "ASC" ? <BiChevronUp/> : <BiChevronDown />} </th>
+            <th onClick={() => Sorting('phone', countries)}>Telefon {order === "ASC" ? <BiChevronUp/> : <BiChevronDown />} </th>
           </tr>
         </thead>
         {sort
           ? SelectCountries(listCountries, userCountries, page)
           : SelectCountries(countries, userCountries, page)}
       </table>
-      {pagesTab.map((pageNumber) => (
-            <a href={"/"+pageNumber} key={pageNumber}> {pageNumber} </a>
-          ))}
+      <div className='selectPages'>
+        {pagesTab.map((pageNumber) => (
+          <button className="numberPage" onClick={() => fetchData(pageNumber)}>{pageNumber}</button>
+        ))}
+      </div>
     </div>
   );
 }

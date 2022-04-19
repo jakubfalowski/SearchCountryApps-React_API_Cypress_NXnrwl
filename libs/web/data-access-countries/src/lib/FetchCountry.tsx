@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ContinentsQuery } from './ContinentsQuery';
-import { ContinentsQueryAll } from './ContinentsQueryAll';
 import SelectCountries from './SelectCountries';
 import { continents } from './ContinentsList';
 import { useParams, useNavigate } from 'react-router-dom';

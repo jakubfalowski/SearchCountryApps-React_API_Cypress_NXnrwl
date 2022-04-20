@@ -8,11 +8,13 @@ import { continents } from './ContinentsList';
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 
 export default function FetchCountry() {
+  enum Order{ ASC, DSC }
+
   const [countries, setCountries] = useState([] as any[]);
   const [continentCode, setContinentCode] = useState('');
   const [amountCountries, setAmountCountries] = useState(0);
   const [userCountries, setUserCountries] = useState(5);
-  const [order, setOrder] = useState('ASC');
+  const [order, setOrder] = useState(Order.ASC);
   const [listCountries, setListCountries] = useState([] as any[]);
   const [sort, setSort] = useState(false);
   let { page } = useParams();
@@ -36,27 +38,20 @@ export default function FetchCountry() {
     setAmountCountries(data.data.continent.countries.length);
     setSort(false);
   };
+  console.log(order);
 
-  enum Order{
-    ASC,
-    DSC
-  }
   const sorting = (col: any, countries: String[]) => {
-    sort === false ? setSort(true) : null;
-    if (order === 'ASC') {
-      const sorted = [...countries].sort((a, b) =>
-        a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1
-      );
+    if(order === Order.ASC){
+      const sorted = [...countries].sort( (a, b) => a[col].localeCompare(b[col], 'fr', { ignorePunctuation: true }));
       setListCountries(sorted);
-      setOrder('DSC');
+      setOrder(Order.DSC);
+      setSort(true);
     }
-
-    if (order === 'DSC') {
-      const sorted = [...countries].sort((a, b) =>
-        a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1
-      );
+    if(order === Order.DSC){
+      const sorted = [...countries].sort( (a, b) => b[col].localeCompare(a[col], 'fr', { ignorePunctuation: true }));
       setListCountries(sorted);
-      setOrder('ASC');
+      setOrder(Order.ASC);
+      setSort(true);
     }
   };
 

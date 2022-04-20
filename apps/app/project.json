@@ -63,16 +63,6 @@
         "jestConfig": "apps/app/jest.config.js",
         "passWithNoTests": true
       }
-    },
-    "fadd": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [
-          {
-            "command": "yarn format && git add * && git commit -m \"styles: prettier\" && git push origin"
-          }
-        ]
-      }
     }
   },
   "sourceTag": "scope:client"

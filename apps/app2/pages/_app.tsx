@@ -1,6 +1,5 @@
 import { Header } from '@app/web/ui-header';
 import { SearchGoogle } from '@app/web/data-access-google';
-import './style.scss';
 
 function CustomApp() {
   return (

@@ -1,6 +1,6 @@
-import FetchCountry from './FetchCountry';
+import CountriesList from './CountriesList';
 import './style.scss';
 
 export function CountryApp() {
-  return <FetchCountry />
+  return <CountriesList />
 }

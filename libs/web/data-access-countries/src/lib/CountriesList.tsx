@@ -38,7 +38,6 @@ export default function FetchCountry() {
     setAmountCountries(data.data.continent.countries.length);
     setSort(false);
   };
-  console.log(order);
 
   const sorting = (col: any, countries: String[]) => {
     if(order === Order.ASC){
@@ -81,7 +80,7 @@ export default function FetchCountry() {
             value={getUserCountries()}
             onChange={(e) => setUserCountries(e.target.valueAsNumber)}
           />{' '}
-          {getUserCountries}/{amountCountries} krotek
+          {getUserCountries()}/{amountCountries} krotek
         </span>
         <select onChange={(e) => setContinentCode(e.target.value)}>
           {continents.map((continent) => (

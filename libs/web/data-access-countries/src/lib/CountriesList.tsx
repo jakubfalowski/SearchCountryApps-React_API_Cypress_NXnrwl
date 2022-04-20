@@ -28,15 +28,19 @@ export default function CountriesList() {
   };
 
   const fetchData = async (pageNumber: String | Number) => {
-    navigate(`/${continentCode}/${pageNumber}`);
-    const response = await fetch(
-      fetchURL + ContinentsQuery(continentCode),
-      options
-    );
-    const data = await response.json();
-    setCountries(data.data.continent.countries);
-    setAmountCountries(data.data.continent.countries.length);
-    setSort(false);
+    try {
+      navigate(`/${continentCode}/${pageNumber}`);
+      const response = await fetch(
+        fetchURL + ContinentsQuery(continentCode),
+        options
+      );
+      const data = await response.json();
+      setCountries(data.data.continent.countries);
+      setAmountCountries(data.data.continent.countries.length);
+      setSort(false);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const sorting = (col: any, countries: String[]) => {

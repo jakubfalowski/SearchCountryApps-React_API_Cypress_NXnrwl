@@ -7,7 +7,7 @@ import { continents } from './ContinentsList';
 
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 
-export default function FetchCountry() {
+export default function CountriesList() {
   enum Order{ ASC, DSC }
 
   const [countries, setCountries] = useState([] as any[]);

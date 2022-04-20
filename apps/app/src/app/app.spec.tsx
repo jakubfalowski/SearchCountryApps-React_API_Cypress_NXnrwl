@@ -1,19 +1,18 @@
 import ReactDOM from 'react-dom';
-import { ContinentButton } from '@app/web/data-access-countries';
 import { render } from '@testing-library/react';
+import App from './app'
 import '@testing-library/jest-dom/extend-expect';
 
-it('Prawidłowo wyrenderowane(react-dom)', () => {
+it('Correctly rendered(react-dom)', () => {
   const span = document.createElement('span');
   ReactDOM.render(
-    <ContinentButton continent="Europe" continentCode="EU" />,
+    <App />,
     span
   );
 });
 
-it('Prawidłowo wyrenderowane button(jest-dom)', () => {
-  const { getByTestId } = render(
-    <ContinentButton continent="Europe" continentCode="EU" />
+it('Correctly rendered(jest-dom)', () => {
+  render(
+    <App />
   );
-  expect(getByTestId('button')).toHaveTextContent('Europe');
 });

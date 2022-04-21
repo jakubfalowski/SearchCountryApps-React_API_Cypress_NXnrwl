@@ -68,8 +68,7 @@ export default function CountriesList() {
 
   let pagesTab = [];
   for (let i = 0; i < amountPages; i++) pagesTab[i] = i + 1;
-
-  console.log(sort)
+  
   return (
     <div>
       <div className="header">

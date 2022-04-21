@@ -37,7 +37,6 @@ export default function CountriesList() {
       const data = await response.json();
       setCountries(data.data.continent.countries);
       setAmountCountries(data.data.continent.countries.length);
-      setSort(false);
     } catch (err) {
       console.error(err);
     }
@@ -70,6 +69,7 @@ export default function CountriesList() {
   let pagesTab = [];
   for (let i = 0; i < amountPages; i++) pagesTab[i] = i + 1;
 
+  console.log(sort)
   return (
     <div>
       <div className="header">
@@ -95,7 +95,7 @@ export default function CountriesList() {
             </option>
           ))}
         </select>
-        <button onClick={() => fetchData(1)}> Wyślij </button>
+        <button onClick={function(){ fetchData(1); setSort(false)}}> Wyślij </button>
       </div>
       <table>
         <thead>

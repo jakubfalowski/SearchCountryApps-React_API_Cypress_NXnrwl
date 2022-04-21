@@ -4,8 +4,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { continentsQuery } from './ContinentsQuery';
 import SelectCountries from './SelectCountries';
 import { continents } from './ContinentsList';
-
-import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
+import { sortingList } from './SortingList';
+import { BiChevron } from './BiChevron';
 
 export default function CountriesList() {
   enum Order{ ASC, DSC }
@@ -100,25 +100,11 @@ export default function CountriesList() {
       <table>
         <thead>
           <tr>
-            <th onClick={() => sorting('name', countries)}>
-              Kraj {Order.ASC ? <BiChevronUp /> : <BiChevronDown />}{' '}
+          {sortingList.map((tuple) => (
+            <th key={tuple.col} onClick={() => sorting(tuple.col, countries)}>
+            {tuple.name} {order === 0 ? <BiChevron isUp={true} /> : <BiChevron isUp={false} />}{' '}
             </th>
-            <th onClick={() => sorting('native', countries)}>
-              Nazwa kraju w ich języku{' '}
-              {Order.ASC ? <BiChevronUp /> : <BiChevronDown />}
-            </th>
-            <th onClick={() => sorting('code', countries)}>
-              Kod {Order.ASC ? <BiChevronUp /> : <BiChevronDown />}{' '}
-            </th>
-            <th onClick={() => sorting('capital', countries)}>
-              Stolica {Order.ASC ? <BiChevronUp /> : <BiChevronDown />}{' '}
-            </th>
-            <th onClick={() => sorting('currency', countries)}>
-              Waluta {Order.ASC ? <BiChevronUp /> : <BiChevronDown />}{' '}
-            </th>
-            <th onClick={() => sorting('phone', countries)}>
-              Telefon {Order.ASC ? <BiChevronUp /> : <BiChevronDown />}{' '}
-            </th>
+           ))}
           </tr>
         </thead>
         {sort

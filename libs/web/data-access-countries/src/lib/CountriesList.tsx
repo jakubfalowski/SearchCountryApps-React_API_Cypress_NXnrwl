@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { ContinentsQuery } from './ContinentsQuery';
+import { continentsQuery } from './ContinentsQuery';
 import SelectCountries from './SelectCountries';
 import { continents } from './ContinentsList';
 
@@ -24,14 +24,14 @@ export default function CountriesList() {
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ query: ContinentsQuery(continentCode) }),
+    body: JSON.stringify({ query: continentsQuery(continentCode) }),
   };
 
   const fetchData = async (pageNumber: String | Number) => {
     try {
       navigate(`/${continentCode}/${pageNumber}`);
       const response = await fetch(
-        fetchURL + ContinentsQuery(continentCode),
+        fetchURL + continentsQuery(continentCode),
         options
       );
       const data = await response.json();
@@ -44,17 +44,16 @@ export default function CountriesList() {
   };
 
   const sorting = (col: any, countries: String[]) => {
+    if(!sort) setSort(true)
     if(order === Order.ASC){
       const sorted = [...countries].sort( (a, b) => a[col].localeCompare(b[col], 'fr', { ignorePunctuation: true }));
       setListCountries(sorted);
       setOrder(Order.DSC);
-      setSort(true);
     }
     if(order === Order.DSC){
       const sorted = [...countries].sort( (a, b) => b[col].localeCompare(a[col], 'fr', { ignorePunctuation: true }));
       setListCountries(sorted);
       setOrder(Order.ASC);
-      setSort(true);
     }
   };
 

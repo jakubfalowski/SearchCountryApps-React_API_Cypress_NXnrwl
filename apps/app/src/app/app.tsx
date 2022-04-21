@@ -1,4 +1,4 @@
-import { CountryApp } from '@app/web/data-access-countries';
+import { CountryApp, continentsQuery, continents } from '@app/web/data-access-countries';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 export function App() {

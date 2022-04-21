@@ -10,12 +10,12 @@ import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 export default function CountriesList() {
   enum Order{ ASC, DSC }
 
-  const [countries, setCountries] = useState([] as any[]);
+  const [countries, setCountries] = useState([] as String[]);
   const [continentCode, setContinentCode] = useState('');
   const [amountCountries, setAmountCountries] = useState(0);
   const [userCountries, setUserCountries] = useState(5);
   const [order, setOrder] = useState(Order.ASC);
-  const [listCountries, setListCountries] = useState([] as any[]);
+  const [listCountries, setListCountries] = useState([] as String[]);
   const [sort, setSort] = useState(false);
   let { page } = useParams();
 

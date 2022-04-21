@@ -68,7 +68,6 @@ export default function CountriesList() {
       : Math.floor(amountCountries / getUserCountries()) + 1;
   let pagesTab = [];
   for (let i = 0; i < amountPages; i++) pagesTab[i] = i + 1;
-  if (page === undefined) page = '1';
 
   return (
     <div>

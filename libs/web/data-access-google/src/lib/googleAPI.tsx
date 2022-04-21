@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { Button, Code, Title, MantineProvider } from '@mantine/core';
+import { useFocusReturn } from '@mantine/hooks';
 
 export function GoogleAPI() {
   const [functionEnabled, enableFunction] = useState(false);
   const [results, setResults] = useState([] as any);
   const [query, setQuery] = useState('');
+  const key='AIzaSyC9ntEwOZg7dixTbfbVOTLr3YNx6fvOI4g';
   const fetchURL =
-    'https://www.googleapis.com/customsearch/v1?key=AIzaSyC9ntEwOZg7dixTbfbVOTLr3YNx6fvOI4g&cx=017576662512468239146:omuauf_lfve&q=';
+    `https://www.googleapis.com/customsearch/v1?key=${key}&cx=017576662512468239146:omuauf_lfve&q=`;
   let lackInfo = false;
 
   const fetchResults = async () => {
@@ -15,6 +17,7 @@ export function GoogleAPI() {
     setResults(data);
     enableFunction(true);
   };
+
   return (
     <div>
       <h3>

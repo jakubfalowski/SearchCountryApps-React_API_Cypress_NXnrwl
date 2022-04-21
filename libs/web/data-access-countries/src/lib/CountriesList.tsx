@@ -62,10 +62,11 @@ export default function CountriesList() {
     else return userCountries
   }
 
-  let amountPages =
+  let amountPages = useMemo(() =>
     amountCountries % getUserCountries() === 0
       ? Math.floor(amountCountries / getUserCountries())
-      : Math.floor(amountCountries / getUserCountries()) + 1;
+      : Math.floor(amountCountries / getUserCountries()) + 1,[amountCountries,getUserCountries()]);
+
   let pagesTab = [];
   for (let i = 0; i < amountPages; i++) pagesTab[i] = i + 1;
 

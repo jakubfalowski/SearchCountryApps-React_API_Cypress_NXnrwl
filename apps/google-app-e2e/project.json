@@ -1,17 +1,17 @@
 {
-  "root": "apps/app2-e2e",
-  "sourceRoot": "apps/app2-e2e/src",
+  "root": "apps/google-app-e2e",
+  "sourceRoot": "apps/google-app-e2e/src",
   "projectType": "application",
   "targets": {
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/app2-e2e/cypress.json",
-        "devServerTarget": "app2:serve"
+        "cypressConfig": "apps/google-app-e2e/cypress.json",
+        "devServerTarget": "google-app:serve"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "app2:serve:production"
+          "devServerTarget": "google-app:serve:production"
         }
       }
     },
@@ -19,10 +19,10 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/app2-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": ["apps/google-app-e2e/**/*.{js,ts}"]
       }
     }
   },
   "tags": [],
-  "implicitDependencies": ["app2"]
+  "implicitDependencies": ["google-app"]
 }

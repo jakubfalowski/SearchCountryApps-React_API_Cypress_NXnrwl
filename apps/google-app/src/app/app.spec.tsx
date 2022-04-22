@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import App from '../pages/_app';
+import App from './app';
 
 describe('App', () => {
   it('Powinno się wyrenderować', () => {
@@ -16,7 +16,7 @@ describe('App', () => {
   });
 
   it('4 dodać 6 powinno być większe od 7', () => {
-    function sum(a, b) {
+    function sum(a:number, b:number) {
       return a + b;
     }
     expect(sum(4, 6)).toBeGreaterThan(7);

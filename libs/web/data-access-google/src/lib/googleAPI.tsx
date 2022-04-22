@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Button, Code, Title, MantineProvider } from '@mantine/core';
-import { useFocusReturn } from '@mantine/hooks';
+
 
 export function GoogleAPI() {
   const [functionEnabled, enableFunction] = useState(false);
@@ -58,17 +57,6 @@ export function GoogleAPI() {
             );
           })
         : ''}
-        <MantineProvider
-      theme={{
-        fontFamily: 'Verdana, sans-serif',
-        fontFamilyMonospace: 'Monaco, Courier, monospace',
-        headings: { fontFamily: 'Greycliff CF, sans-serif' },
-      }}
-    >
-      <Title order={3}>Greycliff CF or sans-serif title</Title>
-      <Button>Verdana button</Button>
-      <Code>Monaco, Courier Code</Code>
-    </MantineProvider>
     </div>
     
   );

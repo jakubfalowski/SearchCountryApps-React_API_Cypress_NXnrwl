@@ -1,4 +1,4 @@
-export default function SelectCountries(
+export function SelectCountries(
   countries: any[],
   userCountries: number,
   page: any

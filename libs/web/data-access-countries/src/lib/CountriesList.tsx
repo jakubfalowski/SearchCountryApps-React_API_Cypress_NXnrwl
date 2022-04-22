@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { continentsQuery } from './ContinentsQuery';
-import SelectCountries from './SelectCountries';
+import { SelectCountries } from './SelectCountries';
 import { continents } from './ContinentsList';
 import { sortingList } from './SortingList';
 import { BiChevron } from './BiChevron';

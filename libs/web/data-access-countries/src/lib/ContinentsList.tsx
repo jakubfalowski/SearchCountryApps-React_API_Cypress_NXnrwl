@@ -1,34 +1,34 @@
 export const continents = [
   {
-    continent: '-',
-    continentCode: '',
+    label: '-',
+    value: '',
   },
   {
-    continent: 'Europe',
-    continentCode: 'EU',
+    label: 'Europe',
+    value: 'EU',
   },
   {
-    continent: 'Africa',
-    continentCode: 'AF',
+    label: 'Africa',
+    value: 'AF',
   },
   {
-    continent: 'South America',
-    continentCode: 'SA',
+    label: 'South America',
+    value: 'SA',
   },
   {
-    continent: 'North America',
-    continentCode: 'NA',
+    label: 'North America',
+    value: 'NA',
   },
   {
-    continent: 'Asia',
-    continentCode: 'AS',
+    label: 'Asia',
+    value: 'AS',
   },
   {
-    continent: 'Oceania',
-    continentCode: 'OC',
+    label: 'Oceania',
+    value: 'OC',
   },
   {
-    continent: 'Antarctica',
-    continentCode: 'AN',
+    label: 'Antarctica',
+    value: 'AN',
   },
 ];

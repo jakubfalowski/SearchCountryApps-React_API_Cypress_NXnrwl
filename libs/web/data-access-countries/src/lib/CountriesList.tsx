@@ -6,9 +6,9 @@ import SelectCountries from './SelectCountries';
 import { continents } from './ContinentsList';
 import { sortingList } from './SortingList';
 import { BiChevron } from './BiChevron';
+import { Order } from './Order';
 
 export default function CountriesList() {
-  enum Order{ ASC, DSC }
 
   const [countries, setCountries] = useState([] as String[]);
   const [continentCode, setContinentCode] = useState('');
@@ -87,10 +87,10 @@ export default function CountriesList() {
         <select onChange={(e) => setContinentCode(e.target.value)}>
           {continents.map((continent) => (
             <option
-              key={continent.continentCode}
-              value={continent.continentCode}
+              key={continent.value}
+              value={continent.value}
             >
-              {continent.continent}
+              {continent.label}
             </option>
           ))}
         </select>

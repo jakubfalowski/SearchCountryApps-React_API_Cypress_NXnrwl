@@ -19,20 +19,17 @@ export function GoogleAPI() {
     enableFunction(true);
   };
 
-  showNotification({
-    title: 'Default notification',
-    message: 'Hey there, your code is awesome! 🤥',
-  })
-
+  const XD = 1;
   return (
+    
     <div>
       <Group position="center">
       <Button
         variant="outline"
         onClick={() =>
           showNotification({
-            title: 'Default notification',
-            message: 'Hey there, your code is awesome! 🤥',
+            title: query,
+            message: XD.toString(),
           })
         }
       >
@@ -77,6 +74,25 @@ export function GoogleAPI() {
             );
           })
         : ''}
+        <div className="chart"></div>
+        <ul className="key">
+          <li>
+            <strong className="percent red">4%</strong>
+            <span className="choice">Jump right in, startupfille here I come.</span>
+          </li>
+          <li>
+            <strong className="percent gray">4%</strong>
+            <span className="choice">Email back to discuss, flattered and positive.</span>
+          </li>
+          <li>
+            <strong className="percent purple">6%</strong>
+            <span className="choice">Respond and say "Thanks but no thanks."</span>
+          </li>
+          <li>
+            <strong className="percent blue">9%</strong>
+            <span className="choice">Email back to discuss, all business.</span>
+          </li>
+        </ul>
     </div>
     
   );

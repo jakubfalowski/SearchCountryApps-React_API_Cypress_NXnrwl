@@ -2,13 +2,13 @@ import React, { useState, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { continentsQuery } from './ContinentsQuery';
-import SelectCountries from './SelectCountries';
+import { SelectCountries } from './SelectCountries';
 import { continents } from './ContinentsList';
 import { sortingList } from './SortingList';
 import { BiChevron } from './BiChevron';
+import { Order } from './Order';
 
 export default function CountriesList() {
-  enum Order{ ASC, DSC }
 
   const [countries, setCountries] = useState([] as String[]);
   const [continentCode, setContinentCode] = useState('');
@@ -66,9 +66,13 @@ export default function CountriesList() {
       ? Math.floor(amountCountries / getUserCountries())
       : Math.floor(amountCountries / getUserCountries()) + 1,[amountCountries,getUserCountries()]);
 
-  let pagesTab = [];
-  for (let i = 0; i < amountPages; i++) pagesTab[i] = i + 1;
-  
+  let pagesTab:number[] = useMemo(() => {
+    const result:number[] = [];
+    for (let i = 0; i < amountPages ; i++) {
+      result[i] = i+1
+    }
+    return result;
+  }, [amountPages]);
   return (
     <div>
       <div className="header">
@@ -87,10 +91,10 @@ export default function CountriesList() {
         <select onChange={(e) => setContinentCode(e.target.value)}>
           {continents.map((continent) => (
             <option
-              key={continent.continentCode}
-              value={continent.continentCode}
+              key={continent.value}
+              value={continent.value}
             >
-              {continent.continent}
+              {continent.label}
             </option>
           ))}
         </select>

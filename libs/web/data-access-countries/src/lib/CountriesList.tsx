@@ -10,14 +10,14 @@ import { Order } from './Order';
 
 export default function CountriesList() {
 
-  const [countries, setCountries] = useState([] as String[]);
+  const [countries, setCountries] = useState([] as string[]);
   const [continentCode, setContinentCode] = useState('');
   const [amountCountries, setAmountCountries] = useState(0);
   const [userCountries, setUserCountries] = useState(5);
   const [order, setOrder] = useState(Order.ASC);
-  const [listCountries, setListCountries] = useState([] as String[]);
+  const [listCountries, setListCountries] = useState([] as string[]);
   const [sort, setSort] = useState(false);
-  let { page } = useParams();
+  const { page } = useParams();
 
   const navigate = useNavigate();
   const fetchURL = 'https://countries.trevorblades.com/graphql';
@@ -27,7 +27,7 @@ export default function CountriesList() {
     body: JSON.stringify({ query: continentsQuery(continentCode) }),
   };
 
-  const fetchData = async (pageNumber: String | Number) => {
+  const fetchData = async (pageNumber: string | number) => {
     try {
       navigate(`/${continentCode}/${pageNumber}`);
       const response = await fetch(
@@ -42,7 +42,7 @@ export default function CountriesList() {
     }
   };
 
-  const sorting = (col: any, countries: String[]) => {
+  const sorting = (col: any, countries: string[]) => {
     if(!sort) setSort(true)
     if(order === Order.ASC){
       const sorted = [...countries].sort( (a, b) => a[col].localeCompare(b[col], 'fr', { ignorePunctuation: true }));
@@ -61,12 +61,12 @@ export default function CountriesList() {
     else return userCountries
   }
 
-  let amountPages = useMemo(() =>
+  const amountPages = useMemo(() =>
     amountCountries % getUserCountries() === 0
       ? Math.floor(amountCountries / getUserCountries())
       : Math.floor(amountCountries / getUserCountries()) + 1,[amountCountries,getUserCountries()]);
 
-  let pagesTab:number[] = useMemo(() => {
+  const pagesTab:number[] = useMemo(() => {
     const result:number[] = [];
     for (let i = 0; i < amountPages ; i++) {
       result[i] = i+1

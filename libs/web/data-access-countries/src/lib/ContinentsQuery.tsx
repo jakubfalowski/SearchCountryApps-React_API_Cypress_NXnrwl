@@ -1,4 +1,4 @@
-export const continentsQuery = (codeContinent: String) => `{
+export const continentsQuery = (codeContinent: string) => `{
     continent(code:"${codeContinent}"){
       code
       name

@@ -66,8 +66,13 @@ export default function CountriesList() {
       ? Math.floor(amountCountries / getUserCountries())
       : Math.floor(amountCountries / getUserCountries()) + 1,[amountCountries,getUserCountries()]);
 
-  let pagesTab = [];
-  for (let i = 0; i < amountPages; i++) pagesTab[i] = i + 1;
+  let pagesTab:number[] = useMemo(() => {
+    const result:number[] = [];
+    for (let i = 0; i < amountPages ; i++) {
+      result[i] = i+1
+    }
+    return result;
+  }, [amountPages]);
   
   return (
     <div>

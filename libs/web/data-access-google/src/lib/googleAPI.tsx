@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Group, Button } from '@mantine/core';
+import { showNotification } from '@mantine/notifications';
 
 
 export function GoogleAPI() {
@@ -17,8 +19,26 @@ export function GoogleAPI() {
     enableFunction(true);
   };
 
+  showNotification({
+    title: 'Default notification',
+    message: 'Hey there, your code is awesome! 🤥',
+  })
+
   return (
     <div>
+      <Group position="center">
+      <Button
+        variant="outline"
+        onClick={() =>
+          showNotification({
+            title: 'Default notification',
+            message: 'Hey there, your code is awesome! 🤥',
+          })
+        }
+      >
+        Show notification
+      </Button>
+    </Group>
       <h3>
         Wpisz dane wyszukiwanie, by sprawdzić jak często zostało one wyświetlane
       </h3>

@@ -73,7 +73,6 @@ export default function CountriesList() {
     }
     return result;
   }, [amountPages]);
-  
   return (
     <div>
       <div className="header">

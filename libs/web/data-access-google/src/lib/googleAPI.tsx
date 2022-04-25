@@ -1,25 +1,27 @@
 import { useState } from 'react';
-import { Group, Button } from '@mantine/core';
+import { Group, Button, Grid } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
-
+import { ResponsiveContainer, PieChart, Pie, Legend } from 'recharts';
 
 export function GoogleAPI() {
   const [functionEnabled, enableFunction] = useState(false);
   const [results, setResults] = useState([] as any);
-  const [query, setQuery] = useState('');
+  const [firstQuery, setFirstQuery] = useState('');
+  const [secondQuery, setSecondQuery] = useState('');
   const key='AIzaSyC9ntEwOZg7dixTbfbVOTLr3YNx6fvOI4g';
   const fetchURL =
     `https://www.googleapis.com/customsearch/v1?key=${key}&cx=017576662512468239146:omuauf_lfve&q=`;
   let lackInfo = false;
 
-  const fetchResults = async () => {
-    const response = await fetch(fetchURL + query);
+  const fetchResults = async (searchName: string) => {
+    const response = await fetch(fetchURL + searchName);
     const data = await response.json();
     setResults(data);
     enableFunction(true);
   };
 
-  const XD = 1;
+  const XD = 1000;
+
   return (
     
     <div>
@@ -28,7 +30,7 @@ export function GoogleAPI() {
         variant="outline"
         onClick={() =>
           showNotification({
-            title: query,
+            title: firstQuery,
             message: XD.toString(),
           })
         }
@@ -40,16 +42,32 @@ export function GoogleAPI() {
         Wpisz dane wyszukiwanie, by sprawdzić jak często zostało one wyświetlane
       </h3>
       <input
-        value={query}
+        value={firstQuery}
         type="text"
         placeholder="google"
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => setFirstQuery(e.target.value)}
       />
-      <button onClick={fetchResults}> Wyświetl</button>
+      {/* <input
+        value={secondQuery}
+        type="text"
+        placeholder="google"
+        onChange={(e) => setSecondQuery(e.target.value)}
+      /> */}
+      <button onClick={function(){ fetchResults(firstQuery); /* fetchResults(secondQuery) */}}> Wyświetl</button>
       {functionEnabled === true ? (
         results.queries.request.map((item: any, i: number) => {
           return (
             <div key={item.searchTerms + i}>
+              <div style={{ width: '100%', height: 300 }}>
+              <ResponsiveContainer>
+                <PieChart>
+                  <Pie dataKey="value" data={[
+    { name: item.searchTerms, value: parseInt(item.totalResults) },
+    { name: 'Group B', value: 12220000001 },
+  ]} fill="#8884d8" label />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
               <h3>Wyszukiwane hasło: {item.searchTerms}</h3>
               <span>
                 Liczba wyszukań:{' '}
@@ -62,6 +80,7 @@ export function GoogleAPI() {
         })
       ) : (
         <p> Musisz wpisać dowolną wartość </p>
+        
       )}
       {functionEnabled === true && lackInfo === false
         ? results.items.map((item: any, i: number) => {
@@ -74,25 +93,11 @@ export function GoogleAPI() {
             );
           })
         : ''}
-        <div className="chart"></div>
-        <ul className="key">
-          <li>
-            <strong className="percent red">4%</strong>
-            <span className="choice">Jump right in, startupfille here I come.</span>
-          </li>
-          <li>
-            <strong className="percent gray">4%</strong>
-            <span className="choice">Email back to discuss, flattered and positive.</span>
-          </li>
-          <li>
-            <strong className="percent purple">6%</strong>
-            <span className="choice">Respond and say "Thanks but no thanks."</span>
-          </li>
-          <li>
-            <strong className="percent blue">9%</strong>
-            <span className="choice">Email back to discuss, all business.</span>
-          </li>
-        </ul>
+        <Grid>
+          <Grid.Col span={4}>
+            
+          </Grid.Col>
+        </Grid>
     </div>
     
   );

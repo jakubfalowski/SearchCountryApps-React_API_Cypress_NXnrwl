@@ -3,8 +3,10 @@ export function SelectCountries(
   userCountries: number,
   page: any
 ) {
+  console.log(countries)
   return (
     <tbody>
+      
       {countries
         .slice(userCountries * (page - 1), userCountries * page)
         .map((country) => (

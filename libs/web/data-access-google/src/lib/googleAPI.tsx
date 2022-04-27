@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Group, Button, Grid } from '@mantine/core';
+import { Group, Button, Grid, TextInput, Box } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { ResponsiveContainer, PieChart, Pie, Legend } from 'recharts';
+import { useForm } from '@mantine/form';
 
 export function GoogleAPI() {
   const [functionEnabled, enableFunction] = useState(false);
@@ -11,16 +12,29 @@ export function GoogleAPI() {
   const key='AIzaSyC9ntEwOZg7dixTbfbVOTLr3YNx6fvOI4g';
   const fetchURL =
     `https://www.googleapis.com/customsearch/v1?key=${key}&cx=017576662512468239146:omuauf_lfve&q=`;
-  let lackInfo = false;
 
   const fetchResults = async (searchName: string) => {
     const response = await fetch(fetchURL + searchName);
     const data = await response.json();
-    setResults(data);
+    setResults(data.searchInformation.totalResults);
     enableFunction(true);
   };
 
   const XD = 1000;
+
+  const form = useForm({
+    initialValues: {
+      input1: '',
+      input2: '',
+    },
+
+    validate: {
+      input1: (value) => (/^[A-Za-z\s]+$/.test(value) ? null : 'Wprowadziłeś nieprawidłowe dane. Wymagane litery bądź spacje.'),
+      input2: (value) => (/^[A-Za-z\s]+$/.test(value) ? null : 'Wprowadziłeś nieprawidłowe dane. Wymagane litery bądź spacje.'),
+    },
+  });
+
+  console.log(results)
 
   return (
     
@@ -41,20 +55,43 @@ export function GoogleAPI() {
       <h3>
         Wpisz dane wyszukiwanie, by sprawdzić jak często zostało one wyświetlane
       </h3>
-      <input
-        value={firstQuery}
-        type="text"
-        placeholder="google"
-        onChange={(e) => setFirstQuery(e.target.value)}
-      />
-      {/* <input
-        value={secondQuery}
-        type="text"
-        placeholder="google"
-        onChange={(e) => setSecondQuery(e.target.value)}
-      /> */}
-      <button onClick={function(){ fetchResults(firstQuery); /* fetchResults(secondQuery) */}}> Wyświetl</button>
-      {functionEnabled === true ? (
+      <Box sx={{ maxWidth: 300 }} mx="auto">
+      <form onSubmit={form.onSubmit((function(values) { fetchResults(values.input1); setFirstQuery(values.input1);  setSecondQuery(values.input2);}))} >
+        <TextInput
+          required
+          label="Pierwsze zapytanie"
+          placeholder="poland"
+          {...form.getInputProps('input1')}
+        />
+
+        <TextInput
+          required
+          label="Drugie zapytanie"
+          placeholder="england"
+          {...form.getInputProps('input2')}
+        />
+
+        <Group position="right" mt="md">
+          <Button type="submit">Submit</Button>
+        </Group>
+      </form>
+      <p> {firstQuery} </p>
+      <p> {secondQuery} </p>
+    </Box>
+    
+
+      {firstQuery !== '' ? 
+      <div style={{ width: '100%', height: 300 }}>
+      <ResponsiveContainer>
+      <PieChart>
+        <Pie dataKey="value" data={[
+{ name: 'XDD', value: parseInt(results) },
+{ name: 'XD', value: parseInt(results) },
+]} fill="#8884d8" label />
+      </PieChart>
+    </ResponsiveContainer></div> : <p> Błąd </p>
+     }
+      {/* {functionEnabled === true ? (
         results.queries.request.map((item: any, i: number) => {
           return (
             <div key={item.searchTerms + i}>
@@ -81,8 +118,8 @@ export function GoogleAPI() {
       ) : (
         <p> Musisz wpisać dowolną wartość </p>
         
-      )}
-      {functionEnabled === true && lackInfo === false
+      )} */}
+      {/* {functionEnabled === true && lackInfo === false
         ? results.items.map((item: any, i: number) => {
             return (
               <div key={item.cacheId + i}>
@@ -92,7 +129,7 @@ export function GoogleAPI() {
               </div>
             );
           })
-        : ''}
+        : ''} */}
         <Grid>
           <Grid.Col span={4}>
             

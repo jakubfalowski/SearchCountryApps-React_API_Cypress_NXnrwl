@@ -1,26 +1,30 @@
 import { useState } from 'react';
 import { Group, Button, Grid, TextInput, Box } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
-import { ResponsiveContainer, PieChart, Pie, Legend } from 'recharts';
+import { ResponsiveContainer, PieChart, Pie, Tooltip } from 'recharts';
 import { useForm } from '@mantine/form';
 
 export function GoogleAPI() {
-  const [functionEnabled, enableFunction] = useState(false);
-  const [results, setResults] = useState([] as any);
+  const [results1, setResults1] = useState(0);
+  const [results2, setResults2] = useState(0);
   const [firstQuery, setFirstQuery] = useState('');
   const [secondQuery, setSecondQuery] = useState('');
   const key='AIzaSyC9ntEwOZg7dixTbfbVOTLr3YNx6fvOI4g';
   const fetchURL =
     `https://www.googleapis.com/customsearch/v1?key=${key}&cx=017576662512468239146:omuauf_lfve&q=`;
 
-  const fetchResults = async (searchName: string) => {
-    const response = await fetch(fetchURL + searchName);
-    const data = await response.json();
-    setResults(data.searchInformation.totalResults);
-    enableFunction(true);
+  const fetchResults = async (searchName1: string, searchName2: string) => {
+    const response1 = await fetch(fetchURL + searchName1);
+    const response2 = await fetch(fetchURL + searchName2);
+    const data1 = await response1.json();
+    const data2 = await response2.json();
+    setResults1(parseInt(data1.searchInformation.totalResults));
+    setResults2(parseInt(data2.searchInformation.totalResults));
+    
   };
 
-  const XD = 1000;
+  console.log(typeof(results1));
+  console.log(results2);
 
   const form = useForm({
     initialValues: {
@@ -34,29 +38,14 @@ export function GoogleAPI() {
     },
   });
 
-  console.log(results)
-
   return (
     
     <div>
-      <Group position="center">
-      <Button
-        variant="outline"
-        onClick={() =>
-          showNotification({
-            title: firstQuery,
-            message: XD.toString(),
-          })
-        }
-      >
-        Show notification
-      </Button>
-    </Group>
       <h3>
         Wpisz dane wyszukiwanie, by sprawdzić jak często zostało one wyświetlane
       </h3>
       <Box sx={{ maxWidth: 300 }} mx="auto">
-      <form onSubmit={form.onSubmit((function(values) { fetchResults(values.input1); setFirstQuery(values.input1);  setSecondQuery(values.input2);}))} >
+      <form onSubmit={form.onSubmit((function(values) { fetchResults(values.input1, values.input2); setFirstQuery(values.input1); setSecondQuery(values.input2);}))} >
         <TextInput
           required
           label="Pierwsze zapytanie"
@@ -75,22 +64,50 @@ export function GoogleAPI() {
           <Button type="submit">Submit</Button>
         </Group>
       </form>
-      <p> {firstQuery} </p>
-      <p> {secondQuery} </p>
     </Box>
     
-
-      {firstQuery !== '' ? 
-      <div style={{ width: '100%', height: 300 }}>
+    <Grid>
+          <Grid.Col span={4}>
+            
+          
+      {results1 !==0 || results2 !== 0 ? 
+      <div><div style={{ width: '100%', height: 300 }}>
       <ResponsiveContainer>
       <PieChart>
         <Pie dataKey="value" data={[
-{ name: 'XDD', value: parseInt(results) },
-{ name: 'XD', value: parseInt(results) },
-]} fill="#8884d8" label />
+          { name: firstQuery+'', value: results1+0 },
+          { name: secondQuery+'', value: results2+0 },
+          ]} fill="#8884d8" label />
+          <Tooltip />
       </PieChart>
-    </ResponsiveContainer></div> : <p> Błąd </p>
+    </ResponsiveContainer></div>
+    <Button
+        variant="outline"
+        onClick={() =>
+          showNotification({
+            title: firstQuery,
+            message: results1,
+          })
+        }
+      >
+        {firstQuery}
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() =>
+          showNotification({
+            title: secondQuery,
+            message: results2,
+          })
+        }
+      >
+        {secondQuery}
+      </Button>
+    </div>
+     : <p> Nie znaleziono </p>
      }
+     </Grid.Col>
+        </Grid>
       {/* {functionEnabled === true ? (
         results.queries.request.map((item: any, i: number) => {
           return (
@@ -130,11 +147,6 @@ export function GoogleAPI() {
             );
           })
         : ''} */}
-        <Grid>
-          <Grid.Col span={4}>
-            
-          </Grid.Col>
-        </Grid>
     </div>
     
   );

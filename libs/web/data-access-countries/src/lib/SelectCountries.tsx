@@ -11,20 +11,20 @@ export function SelectCountries(
         .slice(userCountries * (page - 1), userCountries * page)
         .map((country) => (
           <tr key={country.code}>
-            <td>{country.name}</td>
-            <td>{country.native}</td>
-            <td>{country.code}</td>
-            <td>
+            <td className="countryName">{country.name}</td>
+            <td className="countryNative">{country.native}</td>
+            <td className="countryCode">{country.code}</td>
+            <td className="countryCapital">
               {country.capital === null
                 ? (country.capital = '-')
                 : country.capital}
             </td>
-            <td>
+            <td className="countryCurrency">
               {country.currency === null
                 ? (country.currency = '-')
                 : country.currency}
             </td>
-            <td>+{country.phone}</td>
+            <td className="countryPhone">+{country.phone}</td>
           </tr>
         ))}
     </tbody>

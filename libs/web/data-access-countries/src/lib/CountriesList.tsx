@@ -37,7 +37,6 @@ export default function CountriesList() {
       const data = await response.json();
       setCountries(data.data.continent.countries);
       setAmountCountries(data.data.continent.countries.length);
-      console.log(data.data.continent.countries[0].phone)
     } catch (err) {
       console.error(err);
     }
@@ -126,7 +125,7 @@ export default function CountriesList() {
         <thead>
           <tr>
           {sortingList.map((tuple) => (
-            <th key={tuple.col} onClick={() => sorting(tuple.col, countries)}>
+            <th key={tuple.col} className={tuple.class} onClick={() => sorting(tuple.col, countries)}>
             {tuple.name} {order === 0 ? <BiChevron isUp={true} /> : <BiChevron isUp={false} />}{' '}
             </th>
            ))}

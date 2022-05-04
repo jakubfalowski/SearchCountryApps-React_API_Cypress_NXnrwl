@@ -54,4 +54,10 @@ body {
     margin: 0 auto;
     font-size: 10px;
   }
+  .countryNative, .countryPhone{
+    display: none;
+  }
+  td{
+    width: 25%!important;
+  }
 }

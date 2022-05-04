@@ -35,6 +35,7 @@ export default function CountriesList() {
         options
       );
       const data = await response.json();
+      console.log(data)
       setCountries(data.data.continent.countries);
       setAmountCountries(data.data.continent.countries.length);
     } catch (err) {

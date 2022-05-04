@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Group, Button, Grid, TextInput, Box, NumberInput } from '@mantine/core';
+import { Group, Button, Grid, TextInput, Box, NumberInput, GroupedTransition } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { ResponsiveContainer, PieChart, Pie, Tooltip } from 'recharts';
-import { useForm } from '@mantine/form';
+import { formList, useForm } from '@mantine/form';
 
 export function GoogleAPI() {
   const [totalResults, setTotalResults] = useState([] as any)
@@ -44,17 +44,20 @@ export function GoogleAPI() {
   }
 
   function returnInput(i:number){
-    return [...Array(i).keys()].map(x => {
+    return [...Array(i).keys()].map((_,index) => {
       return(
-        <TextInput
-          required
-          label={`Zapytanie nr. ${x+1}`}
-          placeholder="google query"
-          {...form.getInputProps('input1')}
-        />
+        <Group key={index} mt="xs">
+          <TextInput
+            required
+            label={`Zapytanie nr. ${index+1}`}
+            placeholder="google query"
+            {...form.getListInputProps('employees', index, 'name')}
+          />
+        </Group>
       )
     })
   }
+
 
   // function PieData(i: number){
   //   for(let x = 0; x<i; x++){
@@ -62,41 +65,24 @@ export function GoogleAPI() {
   //   }
   // } 
 
-  const number = useForm({
-    initialValues: {
-      input1: '',
-    },
-
-    validate: {
-      input1: (value) => (/^[0-9]+$/.test(value) ? null : 'Wprowadziłeś nieprawidłowe dane. Wymagane litery bądź spacje.'),
-    },
-  });
-
   const form = useForm({
     initialValues: {
-      input1: '',
-      input2: '',
-    },
-
-    validate: {
-      input1: (value) => (/^[A-Za-z\s]+$/.test(value) ? null : 'Wprowadziłeś nieprawidłowe dane. Wymagane litery bądź spacje.'),
-      input2: (value) => (/^[A-Za-z\s]+$/.test(value) ? null : 'Wprowadziłeś nieprawidłowe dane. Wymagane litery bądź spacje.'),
+      employees: formList([{name: ''}])
     },
   });
 
   return (
     
     <div>
-      <form onSubmit={number.onSubmit((function(values) {returnButton(numberOfQueries); returnInput(numberOfQueries); }))}>
-        <NumberInput value={numberOfQueries} max={5} min={1} onChange={(val: number) => setNumberOfQueries(val)} />
-      </form>
+        <NumberInput value={numberOfQueries} max={5} min={1} onChange={(val: number) => setNumberOfQueries(val) } />
       <h3>
         Wpisz dane wyszukiwanie, by sprawdzić jak często zostało one wyświetlane
       </h3>
       {returnButton(numberOfQueries)}
       <Box sx={{ maxWidth: 300 }} mx="auto">
-      <form /* onSubmit={form.onSubmit((function(values) { fetchResults(values.input1, values.input2); setFirstQuery(values.input1); setSecondQuery(values.input2);}))} */>
+      <form onSubmit={form.onSubmit((values) => console.log(values, typeof(Object.values(values))))}>
         {returnInput(numberOfQueries)}
+        
 
         <Group position="right" mt="md">
           <Button type="submit">Submit</Button>
@@ -104,6 +90,10 @@ export function GoogleAPI() {
       </form>
     </Box>
     
+    {/* <Button onClick={() => form.addListItem('employees', { name: '' })}>
+          Dodaj przestrzen
+    </Button> */}
+
     <Grid>
       <Grid.Col span={4}>   
         {totalResults[0] !== 0 ? 

@@ -1,5 +1,6 @@
 import GoogleAPI from './googleAPI';
 import Test from './Test'
+import Demo from './Demo'
 import './styles.scss'
 import {
   useQuery,

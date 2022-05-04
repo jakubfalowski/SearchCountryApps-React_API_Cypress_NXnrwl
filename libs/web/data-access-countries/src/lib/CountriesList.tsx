@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { continentsQuery } from './ContinentsQuery';
@@ -17,7 +17,7 @@ export default function CountriesList() {
   const [order, setOrder] = useState(Order.ASC);
   const [listCountries, setListCountries] = useState([] as string[]);
   const [sort, setSort] = useState(false);
-  const { page } = useParams();
+  const { page, code } = useParams();
 
   const navigate = useNavigate();
   const fetchURL = 'https://countries.trevorblades.com/graphql';
@@ -35,26 +35,43 @@ export default function CountriesList() {
         options
       );
       const data = await response.json();
-      console.log(data)
       setCountries(data.data.continent.countries);
       setAmountCountries(data.data.continent.countries.length);
+      console.log(data.data.continent.countries[0].phone)
     } catch (err) {
       console.error(err);
     }
   };
 
+
   const sorting = (col: any, countries: string[]) => {
     if(!sort) setSort(true)
-    if(order === Order.ASC){
-      const sorted = [...countries].sort( (a, b) => a[col].localeCompare(b[col], 'fr', { ignorePunctuation: true }));
-      setListCountries(sorted);
-      setOrder(Order.DSC);
+    if(col === 'phone'){
+      if(order === Order.ASC){
+        const sorted = [...countries].sort((a,b) => parseInt(a[col])-parseInt(b[col]));
+        setListCountries(sorted)
+        setOrder(Order.DSC);
+      }
+      if(order === Order.DSC){
+        const sorted = [...countries].sort((a,b) => parseInt(b[col])-parseInt(a[col]));
+        setListCountries(sorted)
+        setOrder(Order.ASC);
+      }
+
     }
-    if(order === Order.DSC){
-      const sorted = [...countries].sort( (a, b) => b[col].localeCompare(a[col], 'fr', { ignorePunctuation: true }));
-      setListCountries(sorted);
-      setOrder(Order.ASC);
+    else{
+      if(order === Order.ASC){
+        const sorted = [...countries].sort( (a, b) => a[col].localeCompare(b[col], 'fr', { ignorePunctuation: true }));
+        setListCountries(sorted);
+        setOrder(Order.DSC);
+      }
+      if(order === Order.DSC){
+        const sorted = [...countries].sort( (a, b) => b[col].localeCompare(a[col], 'fr', { ignorePunctuation: true }));
+        setListCountries(sorted);
+        setOrder(Order.ASC);
+      }
     }
+    
   };
 
   const getUserCountries = () => {
@@ -74,6 +91,7 @@ export default function CountriesList() {
     }
     return result;
   }, [amountPages]);
+
   return (
     <div>
       <div className="header">
@@ -101,6 +119,9 @@ export default function CountriesList() {
         </select>
         <button onClick={function(){ fetchData(1); setSort(false)}}> Wyślij </button>
       </div>
+      {continents.map(item => (
+        code === item.value ? <p>Obecnie wyszukujesz fraze dla: <b>{item.label}</b></p> : null
+      ))}
       <table>
         <thead>
           <tr>

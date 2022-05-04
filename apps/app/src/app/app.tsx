@@ -6,7 +6,7 @@ export function App() {
     <Router>
       <Routes>
         <Route path={'/'} element={<CountryApp />} />
-        <Route path={'/:continentCode/:page'} element={<CountryApp />} />
+        <Route path={'/:code/:page'} element={<CountryApp />} />
       </Routes>
     </Router>
   );

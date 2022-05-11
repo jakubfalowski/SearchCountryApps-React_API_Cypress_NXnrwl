@@ -70,7 +70,7 @@ export function SelectIndex() {
             placeholder="google query"
             {...form.getListInputProps('employees', index, 'name')}
           />
-          {/* <ColorPicker format="rgba" value={value} onChange={setValue} /> */}
+          {/* <ColorPicker format="rgba" value={value} onChange={setValue} /> w przyszłości dorobie */}
         </Group>
       )
     })
@@ -79,11 +79,19 @@ export function SelectIndex() {
   const tab = [] as any
   totalResults.map((n:string, item:number) => tab.push({"name":query?.employees[item].name+" "+Math.round(parseInt(n)/allResults*100)+"%" , "value": parseInt(n)}));
 
+  // const tab2 = [] as any
+  // totalResults.map((n:string, item:number) => tab2.push({name:''}))
+  // console.log(tab2) 
+
+  // żeby aplikacja działała np przy 3 inputach trzeba nacisnac 2 razy button(linijka 112) :D mam problem z dynamicznym dodaniem mantinowego pola w liscie inputow
+
   const form = useForm({
     initialValues: {
       employees: formList([{name: ''}])
     },
   });
+
+  console.log(form)
 
   const COLORS = ['red','green', 'blue', 'orange', 'cyan' ]
   return (

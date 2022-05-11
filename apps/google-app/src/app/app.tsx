@@ -1,9 +1,8 @@
 import { Header } from '@app/web/ui-header';
-import { SearchGoogle } from '@app/web/data-access-google';
+import { GoogleApp } from '@app/web/data-access-google';
 import { MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
-import {Example} from '@app/web/data-access-google';
 
 
 
@@ -13,7 +12,7 @@ function CustomApp() {
     <QueryClientProvider client={queryClient}>
       <MantineProvider>
         <NotificationsProvider>
-          <SearchGoogle />
+          <GoogleApp />
         </NotificationsProvider>
       </MantineProvider>
     </QueryClientProvider>

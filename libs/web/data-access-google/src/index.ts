@@ -1,2 +1,1 @@
-export * from './lib/SearchGoogle';
-export * from './lib/Example'
+export * from './lib/googleApp';

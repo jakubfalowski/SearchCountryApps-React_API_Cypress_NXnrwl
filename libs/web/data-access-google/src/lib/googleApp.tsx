@@ -1,22 +1,18 @@
-import GoogleAPI from './googleAPI';
-import Test from './Test'
+import SelectIndex from './selectIndex';
 import './styles.scss'
 import {
-  useQuery,
-  useMutation,
-  useQueryClient,
   QueryClient,
   QueryClientProvider,
 } from 'react-query'
 
 const queryClient = new QueryClient()
 
-export function SearchGoogle() {
+export function GoogleApp() {
   return (
     <QueryClientProvider client={queryClient}>
-      <GoogleAPI />
+      <SelectIndex />
   </QueryClientProvider>
   );
 }
 
-export default SearchGoogle;
+export default GoogleApp;

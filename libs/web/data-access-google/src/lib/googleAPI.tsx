@@ -1,29 +1,43 @@
 import React, { useState } from 'react';
-import { Group, Button, Grid, TextInput, Box, NumberInput, GroupedTransition } from '@mantine/core';
+import { Group, Button, Grid, TextInput, Box, NumberInput, ColorPicker, Text} from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
-import { ResponsiveContainer, PieChart, Pie, Tooltip } from 'recharts';
+import { ResponsiveContainer, PieChart, Pie, Tooltip, Cell } from 'recharts';
 import { formList, useForm } from '@mantine/form';
 
 export function GoogleAPI() {
-  const [totalResults, setTotalResults] = useState([] as any)
-  const [searchTimes, setSearchTimes] = useState([] as any)
+  const [totalResults,setTotalResults] = useState([] as any)
+  const [searchTimes,setSearchTimes] = useState([] as any)
   const [query, setQuery] = useState([] as any)
   const [numberOfQueries, setNumberOfQueries] = useState(1);
-  const key='AIzaSyC9ntEwOZg7dixTbfbVOTLr3YNx6fvOI4g';
-  const key2='AIzaSyB45fm5hOp9Fpm-1z9ACUfrLVLQKTuMWBY'
-  const fetchURL =
-    `https://www.googleapis.com/customsearch/v1?key=${key}&cx=017576662512468239146:omuauf_lfve&q=`;
+  const [value, setValue] = useState('rgba(255,0,0, 0.8)');
 
-  const fetchResults = async (searchNames: Array<string>, numberOfQueries: number) => {
+  const key='AIzaSyC9ntEwOZg7dixTbfbVOTLr3YNx6fvOI4g';
+  const key2='AIzaSyB45fm5hOp9Fpm-1z9ACUfrLVLQKTuMWBY';
+  const key3='AIzaSyARjbtgeF4C3dPCXNyGmnVhgGqiUmCTqCI';
+  const key4='AIzaSyBCnKX-ObOWhYFN5XO7-EgaeuAOWMhtOsw';
+  const key5='AIzaSyBffbK0spqz_ksvT_p9L-NsAkWtUcYljrk'
+  const fetchURL =
+    `https://www.googleapis.com/customsearch/v1?key=${key5}&cx=017576662512468239146:omuauf_lfve&q=`;
+
+  const fetchResults = async (numberOfQueries: number) => {
     const response = []
     const data = []
+    const tr = [];
+    const st = [];
+
     for(let i = 0; i<numberOfQueries; i++){
-      response[i] = await fetch(fetchURL + searchNames[i]);
+      response[i] = await fetch(fetchURL + query.employees[i].name);
       data[i] = await response[i].json();
-      setTotalResults(data[i].searchInformation.totalResults)
-      setSearchTimes(data[i].searchInformation.searchTimes)
+      console.log(data[i])
+      tr.push(data[i].searchInformation.totalResults)
+      st.push(data[i].searchInformation.searchTime)
+      // console.log(query.employees !== undefined && query?.employees[0].name)
     }
-  };
+    setTotalResults(tr);
+    setSearchTimes(st)
+  }
+
+  console.log(numberOfQueries)
   
   function returnButton(i:number){
     return [...Array(i).keys()].map(x => {
@@ -32,12 +46,12 @@ export function GoogleAPI() {
           variant="outline"
           onClick={() =>
             showNotification({
-              title: query[x],
+              title: query?.employees[x].name,
               message: `wyniki wyszukiwania: ${totalResults[x]}, czas wyszukania: ${searchTimes[x]}`,
             })
           }
         >
-          {x+1} : {query[x]}
+          {x+1} : {query.employees !== undefined && query?.employees[x].name}
         </Button>
       )
     })
@@ -53,17 +67,16 @@ export function GoogleAPI() {
             placeholder="google query"
             {...form.getListInputProps('employees', index, 'name')}
           />
+          <ColorPicker format="rgba" value={value} onChange={setValue} />
         </Group>
       )
     })
   }
 
+  const tab = [] as any
+  totalResults.map((n:any, item:any) => tab.push({"name":query?.employees[item].name , "value": parseInt(n)}));
 
-  // function PieData(i: number){
-  //   for(let x = 0; x<i; x++){
-  //     {name: query[x], value: totalResults[x]}
-  //   }
-  // } 
+  console.log(tab)
 
   const form = useForm({
     initialValues: {
@@ -71,6 +84,7 @@ export function GoogleAPI() {
     },
   });
 
+  const COLORS = ['#E01800','#6EC120', '#0B1EDA', '#0DFEFE', '#E1F302' ]
   return (
     
     <div>
@@ -78,21 +92,23 @@ export function GoogleAPI() {
       <h3>
         Wpisz dane wyszukiwanie, by sprawdzić jak często zostało one wyświetlane
       </h3>
-      {returnButton(numberOfQueries)}
       <Box sx={{ maxWidth: 300 }} mx="auto">
-      <form onSubmit={form.onSubmit((values) => console.log(values, typeof(Object.values(values))))}>
+      <form onSubmit={form.onSubmit((values) => setQuery(values))}>
+      {/* {query.map((tuple: any) => {
+            console.log(tuple.employees.name)
+      })} */}
         {returnInput(numberOfQueries)}
         
 
         <Group position="right" mt="md">
-          <Button type="submit">Submit</Button>
+          <Button type="submit" onClick={() => fetchResults(numberOfQueries)}>Submit</Button>
         </Group>
       </form>
     </Box>
     
-    {/* <Button onClick={() => form.addListItem('employees', { name: '' })}>
+    <Button onClick={() => form.addListItem('employees', { name: '' })}>
           Dodaj przestrzen
-    </Button> */}
+    </Button>
 
     <Grid>
       <Grid.Col span={4}>   
@@ -101,55 +117,21 @@ export function GoogleAPI() {
         <div style={{ width: '100%', height: 300 }}>
           <ResponsiveContainer>
             <PieChart>
-              {/* <Pie dataKey="value" data={PieData} fill="#8884d8" label /> */}
+              <Pie dataKey="value" data={tab} fill="#8884d8" label>
+              {
+          	tab.map((entry: any, index: any) => <Cell fill={COLORS[index % COLORS.length]}/>)
+          }
+          </Pie>
                 <Tooltip />
             </PieChart>
           </ResponsiveContainer>
+          {query.employees !== undefined ? returnButton(numberOfQueries): null}
         </div>
         </div>
         : <p> Nie znaleziono </p>
         }
       </Grid.Col>
     </Grid>
-      {/* {functionEnabled === true ? (
-        results.queries.request.map((item: any, i: number) => {
-          return (
-            <div key={item.searchTerms + i}>
-              <div style={{ width: '100%', height: 300 }}>
-              <ResponsiveContainer>
-                <PieChart>
-                  <Pie dataKey="value" data={[
-    { name: item.searchTerms, value: parseInt(item.totalResults) },
-    { name: 'Group B', value: 12220000001 },
-  ]} fill="#8884d8" label />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-              <h3>Wyszukiwane hasło: {item.searchTerms}</h3>
-              <span>
-                Liczba wyszukań:{' '}
-                {item.totalResults === undefined
-                  ? (lackInfo = true)
-                  : item.totalResults}
-              </span>
-            </div>
-          );
-        })
-      ) : (
-        <p> Musisz wpisać dowolną wartość </p>
-        
-      )} */}
-      {/* {functionEnabled === true && lackInfo === false
-        ? results.items.map((item: any, i: number) => {
-            return (
-              <div key={item.cacheId + i}>
-                <h3>
-                  Tytuł: <a href={item.link}> {item.title}</a>
-                </h3>
-              </div>
-            );
-          })
-        : ''} */}
     </div>
     
   );

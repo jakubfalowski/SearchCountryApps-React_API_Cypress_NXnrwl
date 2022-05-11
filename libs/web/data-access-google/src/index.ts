@@ -1,2 +1,2 @@
 export * from './lib/SearchGoogle';
-export * from './lib/Demo'
+export * from './lib/Example'

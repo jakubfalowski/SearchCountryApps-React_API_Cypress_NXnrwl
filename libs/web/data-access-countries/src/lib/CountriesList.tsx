@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import {useQuery} from "@apollo/client";
 
 import { continentsQuery } from './ContinentsQuery';
 import { SelectCountries } from './SelectCountries';
@@ -7,6 +8,7 @@ import { continents } from './ContinentsList';
 import { sortingList } from './SortingList';
 import { BiChevron } from './BiChevron';
 import { Order } from './Order';
+
 
 export default function CountriesList() {
 
@@ -27,8 +29,12 @@ export default function CountriesList() {
     body: JSON.stringify({ query: continentsQuery(continentCode) }),
   };
 
+  // const { loading, error, data } = useQuery(continentsQuery(continentCode));
+
+  // if (loading) return <p>Loading...</p>;
+  // if (error) return <p>Error :(</p>;
+
   const fetchData = async (pageNumber: string | number) => {
-    try {
       navigate(`/${continentCode}/${pageNumber}`);
       const response = await fetch(
         fetchURL + continentsQuery(continentCode),
@@ -37,9 +43,6 @@ export default function CountriesList() {
       const data = await response.json();
       setCountries(data.data.continent.countries);
       setAmountCountries(data.data.continent.countries.length);
-    } catch (err) {
-      console.error(err);
-    }
   };
 
 

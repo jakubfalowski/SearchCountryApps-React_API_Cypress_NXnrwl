@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Group, Button, Grid, TextInput, Box, NumberInput, ColorPicker, Text} from '@mantine/core';
+import { Group, Button, Grid, TextInput, Box, NumberInput, ColorPicker, Text, DEFAULT_THEME, HueSlider} from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { ResponsiveContainer, PieChart, Pie, Tooltip, Cell } from 'recharts';
 import { formList, useForm } from '@mantine/form';
+import hslToColorName from './hslToColorName';
 
 const key1='AIzaSyC9ntEwOZg7dixTbfbVOTLr3YNx6fvOI4g';
 const key2='AIzaSyB45fm5hOp9Fpm-1z9ACUfrLVLQKTuMWBY';
@@ -17,9 +18,7 @@ export function SelectIndex() {
   const [totalResults,setTotalResults] = useState([] as any)
   const [searchTimes,setSearchTimes] = useState([0])
   const [query, setQuery] = useState([] as any)
-  const [numberOfQueries, setNumberOfQueries] = useState(1);
-  
-  // const [value, setValue] = useState('rgba(255,0,0, 0.8)');
+  const [colors, setColors] = useState([200, 0, 100]);
 
   const fetchResults = async (numberOfQueries: number) => {
     const response = []
@@ -34,44 +33,41 @@ export function SelectIndex() {
       st.push(data[i].searchInformation.searchTime)
       allResults += parseInt(data[i].searchInformation.totalResults);
     }
+    console.log(totalResults)
+    console.log(searchTimes)
     setTotalResults(tr);
     setSearchTimes(st)
   }
 
   
   function returnButton(i:number){
-    return [...Array(i).keys()].map(x => {
+    return [...Array(i).keys()].map(index => {
       return(
-        <Button
-          variant="outline"
-          key={x}
-          color={COLORS[x % COLORS.length]}
-          onClick={() =>
-            showNotification({
-              title: query?.employees[x].name,
-              message: `wyniki wyszukiwania: ${totalResults[x]}, czas wyszukania: ${searchTimes[x]}`,
-            })
-          }
-        >
-          
-          {x+1} : {query.employees !== undefined && query?.employees[x].name}
-        </Button>
+          <Button
+            color={hslToColorName(colors[index])}
+            key={index}
+          >
+            {index+1} : {query.employees !== undefined && query?.employees[index].name}
+          </Button>
       )
     })
   }
 
+  
+
   function returnInput(i:number){
+    const colorsCopy = [200, 0 ,100] as any;
     return [...Array(i).keys()].map((_,index) => {
       return(
-        <Group key={index} mt="xs">
+        <span key={index}>
           <TextInput
             required
             label={`Zapytanie nr. ${index+1}`}
             placeholder="google query"
             {...form.getListInputProps('employees', index, 'name')}
           />
-          {/* <ColorPicker format="rgba" value={value} onChange={setValue} /> w przyszłości dorobie */}
-        </Group>
+          <HueSlider value={colors[index]} onChange={(e) => { colorsCopy.splice(index,1); colorsCopy.splice(index, 0, e); setColors(colorsCopy);}} />
+        </span>
       )
     })
   }
@@ -87,31 +83,22 @@ export function SelectIndex() {
 
   const form = useForm({
     initialValues: {
-      employees: formList([{name: ''}])
+      employees: formList([{name: ''}, {name: ''}, {name: ''}])
     },
   });
 
-  console.log(form)
-
-  const COLORS = ['red','green', 'blue', 'orange', 'cyan' ]
   return (
     
     <div>
-      <NumberInput value={numberOfQueries} max={5} min={1} onChange={(val: number) => setNumberOfQueries(val) } />
       <h3>
         Wpisz dane wyszukiwanie, by sprawdzić jak często zostało one wyświetlane
       </h3>
-      <Box sx={{ maxWidth: 300 }} mx="auto">
+      <Box>
       <form onSubmit={form.onSubmit((values) => setQuery(values))}>
-        {returnInput(numberOfQueries)}
-        <Group position="right" mt="md">
-          <Button type="submit" onClick={() => fetchResults(numberOfQueries)}>Submit</Button>
-        </Group>
+        <div className="inputContainer">{returnInput(3)}<Button type="submit" onClick={() => fetchResults(3)}>Submit</Button></div>
+        
       </form>
     </Box>
-    <Button onClick={() => form.addListItem('employees', { name: '' })}>
-          Dodaj przestrzen
-    </Button>
     <Grid>
       <Grid.Col span={4}>   
         {totalResults[0] !== 0 ? 
@@ -119,12 +106,20 @@ export function SelectIndex() {
           <ResponsiveContainer>
             <PieChart>
               <Pie dataKey="value" data={tab} label>
-                {tab.map((entry: any, index: any) => <Cell key={index} fill={COLORS[index % COLORS.length]}/>)}
+                {tab.map((entry: any, index: any) => 
+                <Cell key={index} fill={`hsl(+${colors[index]},100%,50%`} 
+                onClick={() =>
+                  showNotification({
+                  title: query?.employees[index].name,
+                  message: `wyniki wyszukiwania: ${totalResults[index]}, czas wyszukania: ${searchTimes[index]}`,
+                  color: hslToColorName(colors[index])
+              })
+            }/>)}
               </Pie>
               <Tooltip />
             </PieChart>
           </ResponsiveContainer>
-          {query.employees !== undefined ? returnButton(numberOfQueries): null}
+          {query.employees !== undefined ? returnButton(3): null}
         </div>
         : <p> Nie znaleziono </p>
         }

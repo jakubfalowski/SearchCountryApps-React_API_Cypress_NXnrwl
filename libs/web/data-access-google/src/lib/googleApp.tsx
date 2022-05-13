@@ -1,17 +1,12 @@
 import SelectIndex from './selectIndex';
 import './styles.scss'
-import {
-  QueryClient,
-  QueryClientProvider,
-} from 'react-query'
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 
 const queryClient = new QueryClient()
 
-export function GoogleApp() {
+export function GoogleApp() {  
   return (
-    <QueryClientProvider client={queryClient}>
-      <SelectIndex />
-  </QueryClientProvider>
+    <SelectIndex />
   );
 }
 

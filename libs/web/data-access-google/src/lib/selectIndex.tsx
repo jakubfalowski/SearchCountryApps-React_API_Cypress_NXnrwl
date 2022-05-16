@@ -12,33 +12,30 @@ const key4='AIzaSyBCnKX-ObOWhYFN5XO7-EgaeuAOWMhtOsw';
 const key5='AIzaSyBffbK0spqz_ksvT_p9L-NsAkWtUcYljrk'
 const fetchURL =
   `https://www.googleapis.com/customsearch/v1?key=${key3}&cx=017576662512468239146:omuauf_lfve&q=`;
-let allResults = 0;
+const colorsCopy = [200, 0, 100];
 
 export function SelectIndex() {
   const [totalResults,setTotalResults] = useState([] as any)
   const [searchTimes,setSearchTimes] = useState([0])
   const [query, setQuery] = useState([] as any)
   const [colors, setColors] = useState([200, 0, 100]);
-
+  const allResults = parseInt(totalResults[0]) + parseInt(totalResults[1]) + parseInt(totalResults[2])
+  
   const fetchResults = async (numberOfQueries: number) => {
     const response = []
     const data = []
-    const tr = [];
-    const st = [];
+    const totalResultsCopy = [];
+    const searchInformationCopy = [];
 
     for(let i = 0; i<numberOfQueries; i++){
       response[i] = await fetch(fetchURL + query.employees[i].name);
       data[i] = await response[i].json();
-      tr.push(data[i].searchInformation.totalResults)
-      st.push(data[i].searchInformation.searchTime)
-      allResults += parseInt(data[i].searchInformation.totalResults);
+      totalResultsCopy.push(data[i].searchInformation.totalResults)
+      searchInformationCopy.push(data[i].searchInformation.searchTime)
     }
-    console.log(totalResults)
-    console.log(searchTimes)
-    setTotalResults(tr);
-    setSearchTimes(st)
+    setTotalResults(totalResultsCopy);
+    setSearchTimes(searchInformationCopy)
   }
-
   
   function returnButton(i:number){
     return [...Array(i).keys()].map(index => {
@@ -53,10 +50,7 @@ export function SelectIndex() {
     })
   }
 
-  
-
   function returnInput(i:number){
-    const colorsCopy = [200, 0 ,100] as any;
     return [...Array(i).keys()].map((_,index) => {
       return(
         <span key={index}>
@@ -66,7 +60,7 @@ export function SelectIndex() {
             placeholder="google query"
             {...form.getListInputProps('employees', index, 'name')}
           />
-          <HueSlider value={colors[index]} onChange={(e) => { colorsCopy.splice(index,1); colorsCopy.splice(index, 0, e); setColors(colorsCopy);}} />
+          <HueSlider value={colors[index]} onChange={(e) => { console.log(colorsCopy, colors); console.log("usuwanie: "+index); colorsCopy.splice(index,1); console.log("dodawanie: "+e+" w miejscu "+index); colorsCopy.splice(index, 0, e); console.log(colorsCopy); setColors(colorsCopy); console.log(colors, colors[index])}} />
         </span>
       )
     })
@@ -75,12 +69,6 @@ export function SelectIndex() {
   const tab = [] as any
   totalResults.map((n:string, item:number) => tab.push({"name":query?.employees[item].name+" "+Math.round(parseInt(n)/allResults*100)+"%" , "value": parseInt(n)}));
 
-  // const tab2 = [] as any
-  // totalResults.map((n:string, item:number) => tab2.push({name:''}))
-  // console.log(tab2) 
-
-  // żeby aplikacja działała np przy 3 inputach trzeba nacisnac 2 razy button(linijka 112) :D mam problem z dynamicznym dodaniem mantinowego pola w liscie inputow
-
   const form = useForm({
     initialValues: {
       employees: formList([{name: ''}, {name: ''}, {name: ''}])
@@ -88,17 +76,19 @@ export function SelectIndex() {
   });
 
   return (
-    
     <div>
       <h3>
         Wpisz dane wyszukiwanie, by sprawdzić jak często zostało one wyświetlane
       </h3>
       <Box>
-      <form onSubmit={form.onSubmit((values) => setQuery(values))}>
-        <div className="inputContainer">{returnInput(3)}<Button type="submit" onClick={() => fetchResults(3)}>Submit</Button></div>
-        
-      </form>
-    </Box>
+        <form onSubmit={form.onSubmit((values) => setQuery(values))}>
+          <div className="inputContainer">{returnInput(3)}
+            <Button type="submit" onClick={() => fetchResults(3)}>
+              Submit
+            </Button>
+          </div>
+        </form>
+      </Box>
     <Grid>
       <Grid.Col span={4}>   
         {totalResults[0] !== 0 ? 
@@ -126,7 +116,6 @@ export function SelectIndex() {
       </Grid.Col>
     </Grid>
     </div>
-    
   );
 }
 export default SelectIndex;

@@ -10,6 +10,6 @@ export function hslToColorName(hsl: number){
     else if(hsl >= 210 && hsl < 270) return 'indigo' 
     else if(hsl >= 270 && hsl < 290) return 'violet'
     else if(hsl >= 290 && hsl < 300) return 'grape'
-    else if(hsl >= 300 && hsl < 340) return 'pink'
+    else return 'pink'
 }
 export default hslToColorName

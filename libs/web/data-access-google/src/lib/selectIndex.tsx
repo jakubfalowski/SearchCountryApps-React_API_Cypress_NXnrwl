@@ -4,6 +4,7 @@ import { showNotification } from '@mantine/notifications';
 import { ResponsiveContainer, PieChart, Pie, Tooltip, Cell } from 'recharts';
 import { formList, useForm } from '@mantine/form';
 import hslToColorName from './hslToColorName';
+import { ReturnButton } from './returnButton';
 
 const key1='AIzaSyC9ntEwOZg7dixTbfbVOTLr3YNx6fvOI4g';
 const key2='AIzaSyB45fm5hOp9Fpm-1z9ACUfrLVLQKTuMWBY';
@@ -11,7 +12,7 @@ const key3='AIzaSyARjbtgeF4C3dPCXNyGmnVhgGqiUmCTqCI';
 const key4='AIzaSyBCnKX-ObOWhYFN5XO7-EgaeuAOWMhtOsw';
 const key5='AIzaSyBffbK0spqz_ksvT_p9L-NsAkWtUcYljrk'
 const fetchURL =
-  `https://www.googleapis.com/customsearch/v1?key=${key3}&cx=017576662512468239146:omuauf_lfve&q=`;
+  `https://www.googleapis.com/customsearch/v1?key=${key2}&cx=017576662512468239146:omuauf_lfve&q=`;
 const colorsCopy = [200, 0, 100];
 
 export function SelectIndex() {
@@ -35,19 +36,6 @@ export function SelectIndex() {
     }
     setTotalResults(totalResultsCopy);
     setSearchTimes(searchInformationCopy)
-  }
-  
-  function returnButton(i:number){
-    return [...Array(i).keys()].map(index => {
-      return(
-          <Button
-            color={hslToColorName(colors[index])}
-            key={index}
-          >
-            {index+1} : {query.employees !== undefined && query?.employees[index].name}
-          </Button>
-      )
-    })
   }
 
   function returnInput(i:number){
@@ -109,7 +97,7 @@ export function SelectIndex() {
               <Tooltip />
             </PieChart>
           </ResponsiveContainer>
-          {query.employees !== undefined ? returnButton(3): null}
+          {query.employees !== undefined ? ReturnButton(3, colors, query): null}
         </div>
         : <p> Nie znaleziono </p>
         }

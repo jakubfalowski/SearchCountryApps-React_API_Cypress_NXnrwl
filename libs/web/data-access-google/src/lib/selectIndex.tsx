@@ -5,6 +5,7 @@ import { ResponsiveContainer, PieChart, Pie, Tooltip, Cell } from 'recharts';
 import { formList, useForm } from '@mantine/form';
 import hslToColorName from './hslToColorName';
 import { ReturnButton } from './returnButton';
+import { ReturnChart } from './returnChart';
 
 const key1='AIzaSyC9ntEwOZg7dixTbfbVOTLr3YNx6fvOI4g';
 const key2='AIzaSyB45fm5hOp9Fpm-1z9ACUfrLVLQKTuMWBY';
@@ -12,7 +13,7 @@ const key3='AIzaSyARjbtgeF4C3dPCXNyGmnVhgGqiUmCTqCI';
 const key4='AIzaSyBCnKX-ObOWhYFN5XO7-EgaeuAOWMhtOsw';
 const key5='AIzaSyBffbK0spqz_ksvT_p9L-NsAkWtUcYljrk'
 const fetchURL =
-  `https://www.googleapis.com/customsearch/v1?key=${key2}&cx=017576662512468239146:omuauf_lfve&q=`;
+  `https://www.googleapis.com/customsearch/v1?key=${key5}&cx=017576662512468239146:omuauf_lfve&q=`;
 const colorsCopy = [200, 0, 100];
 
 export function SelectIndex() {
@@ -54,28 +55,6 @@ export function SelectIndex() {
     })
   }
 
-  function returnChart(){
-    return(
-    <div className="pieContainer" style={{ width: '100%', height: 300 }}>
-    <ResponsiveContainer>
-            <PieChart>
-              <Pie dataKey="value" data={tab} label>
-                {tab.map((entry: any, index: any) => 
-                <Cell key={index} fill={`hsl(+${colors[index]},100%,50%`} 
-                onClick={() =>
-                  showNotification({
-                  title: query?.employees[index].name,
-                  message: `wyniki wyszukiwania: ${totalResults[index]}, czas wyszukania: ${searchTimes[index]}`,
-                  color: hslToColorName(colors[index])
-              })
-            }/>)}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
-          </div>)
-  }
-
   const tab = [] as any
   totalResults.map((n:string, item:number) => tab.push({"name":query?.employees[item].name+" "+Math.round(parseInt(n)/allResults*100)+"%" , "value": parseInt(n)}));
 
@@ -101,7 +80,7 @@ export function SelectIndex() {
       </Box>
     <Grid>
       <Grid.Col span={4}>    
-          {returnChart()}
+          {ReturnChart(tab, colors, query, totalResults, searchTimes)}
           {ReturnButton(3, colors, query)}
 
       </Grid.Col>

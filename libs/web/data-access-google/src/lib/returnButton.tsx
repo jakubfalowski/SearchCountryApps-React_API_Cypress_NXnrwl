@@ -14,4 +14,5 @@ export function ReturnButton(i:number, colors:any, query:any){
         )
         })
     }
+    else return "<p> Brak wpisanego zapytania </p>"
   }

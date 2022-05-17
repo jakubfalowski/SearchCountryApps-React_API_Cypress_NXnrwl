@@ -1,8 +1,20 @@
+html{
+    background-color: #E5E5E5;
+}
 
+.box{
+    background-color: white;
+}
+.searchBox{
+    background-color: #1E1ADD;
+    margin: 5vh 5%;
+    & label{
+        color: white;
+    }
+}
 .inputContainer{
     display: flex;
     justify-content:center;
-    align-items: flex-end;
     width: 50%;
     max-width: 1080px;
     & span{

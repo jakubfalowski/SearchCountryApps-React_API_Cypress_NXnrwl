@@ -13,12 +13,13 @@ const key3='AIzaSyARjbtgeF4C3dPCXNyGmnVhgGqiUmCTqCI';
 const key4='AIzaSyBCnKX-ObOWhYFN5XO7-EgaeuAOWMhtOsw';
 const key5='AIzaSyBffbK0spqz_ksvT_p9L-NsAkWtUcYljrk'
 const fetchURL =
-  `https://www.googleapis.com/customsearch/v1?key=${key5}&cx=017576662512468239146:omuauf_lfve&q=`;
+  `https://www.googleapis.com/customsearch/v1?key=${key1}&cx=017576662512468239146:omuauf_lfve&q=`;
 const colorsCopy = [200, 0, 100];
 
 export function SelectIndex() {
   const [totalResults,setTotalResults] = useState([] as any)
   const [searchTimes,setSearchTimes] = useState([0])
+  const [items, setItems] = useState([] as any)
   const [query, setQuery] = useState([] as any)
   const [colors, setColors] = useState([200, 0, 100]);
   const allResults = parseInt(totalResults[0]) + parseInt(totalResults[1]) + parseInt(totalResults[2])
@@ -28,15 +29,19 @@ export function SelectIndex() {
     const data = []
     const totalResultsCopy = [];
     const searchInformationCopy = [];
+    const itemsCopy = [];
 
     for(let i = 0; i<numberOfQueries; i++){
       response[i] = await fetch(fetchURL + query.employees[i].name);
       data[i] = await response[i].json();
       totalResultsCopy.push(data[i].searchInformation.totalResults)
       searchInformationCopy.push(data[i].searchInformation.searchTime)
+      // console.log(data[i].items)
+      itemsCopy.push(data[i].items)
     }
     setTotalResults(totalResultsCopy);
-    setSearchTimes(searchInformationCopy)
+    setSearchTimes(searchInformationCopy);
+    setItems(itemsCopy);
   }
 
   function returnInput(i:number){
@@ -55,21 +60,29 @@ export function SelectIndex() {
     })
   }
 
+  function returnInfo(i:number){
+    [...Array(i).keys()].map((_,index) => {
+      items[index] !== undefined &&
+       items[index].map((item: any, i:any) => (
+        <p key={i}> XD
+          {item.title}
+        </p>
+      ))
+    })
+  }
+
   const tab = [] as any
   totalResults.map((n:string, item:number) => tab.push({"name":query?.employees[item].name+" "+Math.round(parseInt(n)/allResults*100)+"%" , "value": parseInt(n)}));
 
   const form = useForm({
     initialValues: {
-      employees: formList([{name: ''}, {name: ''}, {name: ''}])
+      employees: formList([{name: 'france'}, {name: 'poland'}, {name: 'england'}])
     },
   });
 
   return (
     <div>
-      <h3>
-        Wpisz dane wyszukiwanie, by sprawdzić jak często zostało one wyświetlane
-      </h3>
-      <Box>
+      <Box className='searchBox'>
         <form onSubmit={form.onSubmit((values) => setQuery(values))}>
           <div className="inputContainer">{returnInput(3)}
             <Button type="submit" onClick={() => fetchResults(3)}>
@@ -79,9 +92,10 @@ export function SelectIndex() {
         </form>
       </Box>
     <Grid>
-      <Grid.Col span={4}>    
+      <Grid.Col span={4} className="box">    
           {ReturnChart(tab, colors, query, totalResults, searchTimes)}
           {ReturnButton(3, colors, query)}
+          {returnInfo(3)}
 
       </Grid.Col>
     </Grid>

@@ -1,31 +1,61 @@
+@import '../../../global.scss';
 html{
-    background-color: #E5E5E5;
+    background-image: url("../background.png");
+    width: 80%;
+    margin: auto;
 }
-
+.center{
+    display: flex;
+    justify-content: center;
+}
 .box{
     background-color: white;
+    border-radius: 5%;
+    overflow: hidden;
+    min-height: $appHeight;
+    margin-top: 5vh;
+}
+.mantine-Grid-root{
+    margin: 0;
 }
 .searchBox{
     background-color: #1E1ADD;
-    margin: 5vh 5%;
     & label{
         color: white;
     }
 }
 .inputContainer{
-    display: flex;
-    justify-content:center;
     width: 50%;
     max-width: 1080px;
-    & span{
-        margin: 5px;
-        & .mantine-1q9eeec{
-            margin-top: 3px;
-            border-radius: 4px;
-        }
+}
+.infoHref{
+    color: black;
+    text-decoration: none;
+    &:hover{
+        text-decoration: underline;
     }
 }
-form{
-    display: flex;
-    justify-content: center;
+.infoContainer{
+    min-height: calc($appHeight / 2)
+    & button{
+        width: 100%;
+        margin-bottom: 10px;
+    }
 }
+.mantine-Col-root{
+    padding: 0;
+}
+.mantine-Paper-root{
+    height: 84px;
+}
+h1{
+    margin-bottom: 0;
+}
+    
+@media (max-width: 600px) {
+    .buttonContainer button {
+        max-width: 30%;
+        font-size: 14px;
+        padding: 5px;
+    }
+  }

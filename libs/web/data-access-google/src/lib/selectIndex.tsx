@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Group, Button, Grid, TextInput, Box, NumberInput, ColorPicker, Text, DEFAULT_THEME, HueSlider} from '@mantine/core';
+import { Group, Button, Grid, TextInput, Box, NumberInput, ColorPicker, Text, DEFAULT_THEME, HueSlider, Paper} from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { ResponsiveContainer, PieChart, Pie, Tooltip, Cell } from 'recharts';
 import { formList, useForm } from '@mantine/form';
@@ -13,7 +13,7 @@ const key3='AIzaSyARjbtgeF4C3dPCXNyGmnVhgGqiUmCTqCI';
 const key4='AIzaSyBCnKX-ObOWhYFN5XO7-EgaeuAOWMhtOsw';
 const key5='AIzaSyBffbK0spqz_ksvT_p9L-NsAkWtUcYljrk'
 const fetchURL =
-  `https://www.googleapis.com/customsearch/v1?key=${key1}&cx=017576662512468239146:omuauf_lfve&q=`;
+  `https://www.googleapis.com/customsearch/v1?key=${key3}&cx=017576662512468239146:omuauf_lfve&q=`;
 const colorsCopy = [200, 0, 100];
 
 export function SelectIndex() {
@@ -30,13 +30,13 @@ export function SelectIndex() {
     const totalResultsCopy = [];
     const searchInformationCopy = [];
     const itemsCopy = [];
+    console.log(query.employees[0].name)
 
     for(let i = 0; i<numberOfQueries; i++){
       response[i] = await fetch(fetchURL + query.employees[i].name);
       data[i] = await response[i].json();
       totalResultsCopy.push(data[i].searchInformation.totalResults)
       searchInformationCopy.push(data[i].searchInformation.searchTime)
-      // console.log(data[i].items)
       itemsCopy.push(data[i].items)
     }
     setTotalResults(totalResultsCopy);
@@ -47,7 +47,7 @@ export function SelectIndex() {
   function returnInput(i:number){
     return [...Array(i).keys()].map((_,index) => {
       return(
-        <span key={index}>
+        <Grid.Col md={12/i} sm={8} xs={12} key={index}>
           <TextInput
             required
             label={`Zapytanie nr. ${index+1}`}
@@ -55,19 +55,26 @@ export function SelectIndex() {
             {...form.getListInputProps('employees', index, 'name')}
           />
           <HueSlider value={colors[index]} onChange={(e) => { console.log(colorsCopy, colors); console.log("usuwanie: "+index); colorsCopy.splice(index,1); console.log("dodawanie: "+e+" w miejscu "+index); colorsCopy.splice(index, 0, e); console.log(colorsCopy); setColors(colorsCopy); console.log(colors, colors[index])}} />
-        </span>
+        </Grid.Col>
       )
     })
   }
 
   function returnInfo(i:number){
-    [...Array(i).keys()].map((_,index) => {
-      items[index] !== undefined &&
-       items[index].map((item: any, i:any) => (
-        <p key={i}> XD
-          {item.title}
-        </p>
-      ))
+    let changeIndex = 0
+    return [...Array(i).keys()].map((_,index) => {
+      if(changeIndex === index){
+        changeIndex += 1;
+        return <Grid.Col md={12/i} xs={12} key={index} className="infoContainer"> <h1 className='center' style={{background: hslToColorName(colors[index])}}>.{function xd(){ if(query !== undefined) return(query.employees[index].name)}}</h1>
+          {items[index]!== undefined ?
+            items[index].map((item: any, i:any) => {
+            return <Paper key={i} shadow="md" p="md" withBorder   style={{ borderBottomColor:hslToColorName(colors[index])} }><a href={item.link} className="infoHref" target="_blank" rel="noreferrer" 
+            ><Text>{item.title}</Text></a></Paper>
+          })
+          : null}
+        </Grid.Col>
+      }
+      else return null
     })
   }
 
@@ -81,25 +88,32 @@ export function SelectIndex() {
   });
 
   return (
-    <div>
+    <div className='box'>
       <Box className='searchBox'>
-        <form onSubmit={form.onSubmit((values) => setQuery(values))}>
-          <div className="inputContainer">{returnInput(3)}
-            <Button type="submit" onClick={() => fetchResults(3)}>
-              Submit
-            </Button>
-          </div>
+        <form className="center" onSubmit={form.onSubmit((values) => setQuery(values))}>
+          <Grid className="inputContainer center">{returnInput(3)}
+            <Grid.Col md={4} sm={8} xs={12} className='center'>
+              <Button color='violet' type="submit">
+                Wyślij hasła
+              </Button>
+            </Grid.Col>
+          </Grid>
         </form>
       </Box>
     <Grid>
-      <Grid.Col span={4} className="box">    
+      <Grid.Col span={12} className="chartContainer">    
           {ReturnChart(tab, colors, query, totalResults, searchTimes)}
-          {ReturnButton(3, colors, query)}
-          {returnInfo(3)}
-
+          <div className='buttonContainer center'>
+            {ReturnButton(3, colors, query)}
+            <br />
+            <Button color='violet' type="submit" onClick={() => fetchResults(3)}>
+              Wyszukaj
+            </Button>
+          </div>
       </Grid.Col>
+      {returnInfo(3)}
     </Grid>
     </div>
-  );
+  )
 }
 export default SelectIndex;

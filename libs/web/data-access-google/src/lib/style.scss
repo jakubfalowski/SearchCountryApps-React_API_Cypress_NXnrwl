@@ -1,8 +1,10 @@
 @import '../../../global.scss';
-html {
-  background-image: url('../background.png');
-  width: 80%;
-  margin: auto;
+body{
+    background-image: url('../background.png');
+    background-size: auto 100vh;
+    width: 80%;
+    max-width: 1080px;
+    margin: auto;
   .center {
     display: flex;
     justify-content: center;
@@ -22,7 +24,7 @@ html {
     min-height: $appHeight;
     margin: 5vh 0;
     .searchBox {
-      background-color: #1e1add;
+      background-color: $searchColor;
       & label {
         color: white;
       }
@@ -61,13 +63,13 @@ html {
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: $laptop) {
   .mantine-Paper-root,
   h1 {
     height: 100px;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: $phone) {
   .recharts-wrapper {
     margin: 0 auto;
     width: 70% !important;

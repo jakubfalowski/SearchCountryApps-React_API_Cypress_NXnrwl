@@ -1,24 +1,17 @@
 import React, { useState, useMemo } from 'react';
 import {
-  Group,
   Button,
   Grid,
   TextInput,
   Box,
-  NumberInput,
-  ColorPicker,
   Text,
-  DEFAULT_THEME,
   HueSlider,
   Paper,
 } from '@mantine/core';
-import { showNotification } from '@mantine/notifications';
-import { ResponsiveContainer, PieChart, Pie, Tooltip, Cell } from 'recharts';
 import { formList, useForm } from '@mantine/form';
 import hslToColorName from './hslToColorName';
 import { ReturnButton } from './returnButton';
 import { ReturnChart } from './returnChart';
-import { Query } from 'react-query';
 
 const key1 = 'AIzaSyC9ntEwOZg7dixTbfbVOTLr3YNx6fvOI4g';
 const key2 = 'AIzaSyB45fm5hOp9Fpm-1z9ACUfrLVLQKTuMWBY';
@@ -28,16 +21,26 @@ const key5 = 'AIzaSyBffbK0spqz_ksvT_p9L-NsAkWtUcYljrk';
 const fetchURL = `https://www.googleapis.com/customsearch/v1?key=${key1}&cx=017576662512468239146:omuauf_lfve&q=`;
 const colorsCopy = [200, 0, 100];
 
+
 export function SelectIndex() {
   const [totalResults, setTotalResults] = useState([] as any);
   const [searchTimes, setSearchTimes] = useState([0]);
   const [items, setItems] = useState([] as any);
   const [query, setQuery] = useState([] as any);
   const [colors, setColors] = useState([200, 0, 100]);
+  const [queryCopy, setQueryCopy] = useState([] as any);
   const allResults =
     parseInt(totalResults[0]) +
     parseInt(totalResults[1]) +
     parseInt(totalResults[2]);
+
+    // const amountPages = useMemo(
+    //   () =>
+    //     amountCountries % getUserCountries() === 0
+    //       ? Math.floor(amountCountries / getUserCountries())
+    //       : Math.floor(amountCountries / getUserCountries()) + 1,
+    //   [amountCountries, getUserCountries()]
+    // );
 
   const fetchResults = async (numberOfQueries: number) => {
     const response = [];
@@ -56,6 +59,7 @@ export function SelectIndex() {
     setTotalResults(totalResultsCopy);
     setSearchTimes(searchInformationCopy);
     setItems(itemsCopy);
+    setQueryCopy(query);
   };
 
   function returnInput(i: number) {
@@ -98,7 +102,7 @@ export function SelectIndex() {
               className="center"
               style={{ background: hslToColorName(colors[index]) }}
             >
-              {query.length > 0 && query[index].name}
+              {queryCopy.length > 0 && queryCopy[index].name}
             </h1>
             {items[index] !== undefined
               ? items[index].map((item: any, i: any) => {

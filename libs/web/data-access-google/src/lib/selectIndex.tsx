@@ -102,7 +102,7 @@ export function SelectIndex() {
         </form>
       </Box>
     <Grid>
-      <Grid.Col span={12} className="chartContainer">    
+      <Grid.Col span={12}>    
           {ReturnChart(tab, colors, query, totalResults, searchTimes)}
     <div className='center'>
       <Grid className='buttonContainer container center'>

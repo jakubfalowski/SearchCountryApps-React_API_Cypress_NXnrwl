@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import {useQuery} from "@apollo/client";
+import { useQuery } from '@apollo/client';
 
 import { continentsQuery } from './ContinentsQuery';
 import { SelectCountries } from './SelectCountries';
@@ -9,9 +9,7 @@ import { sortingList } from './SortingList';
 import { BiChevron } from './BiChevron';
 import { Order } from './Order';
 
-
 export default function CountriesList() {
-
   const [countries, setCountries] = useState([] as string[]);
   const [continentCode, setContinentCode] = useState('');
   const [amountCountries, setAmountCountries] = useState(0);
@@ -35,61 +33,68 @@ export default function CountriesList() {
   // if (error) return <p>Error :(</p>;
 
   const fetchData = async (pageNumber: string | number) => {
-      navigate(`/${continentCode}/${pageNumber}`);
-      const response = await fetch(
-        fetchURL + continentsQuery(continentCode),
-        options
-      );
-      const data = await response.json();
-      setCountries(data.data.continent.countries);
-      setAmountCountries(data.data.continent.countries.length);
+    navigate(`/${continentCode}/${pageNumber}`);
+    const response = await fetch(
+      fetchURL + continentsQuery(continentCode),
+      options
+    );
+    const data = await response.json();
+    setCountries(data.data.continent.countries);
+    setAmountCountries(data.data.continent.countries.length);
   };
 
-
   const sorting = (col: any, countries: string[]) => {
-    if(!sort) setSort(true)
-    if(col === 'phone'){
-      if(order === Order.ASC){
-        const sorted = [...countries].sort((a,b) => parseInt(a[col])-parseInt(b[col]));
-        setListCountries(sorted)
-        setOrder(Order.DSC);
-      }
-      if(order === Order.DSC){
-        const sorted = [...countries].sort((a,b) => parseInt(b[col])-parseInt(a[col]));
-        setListCountries(sorted)
-        setOrder(Order.ASC);
-      }
-
-    }
-    else{
-      if(order === Order.ASC){
-        const sorted = [...countries].sort( (a, b) => a[col].localeCompare(b[col], 'fr', { ignorePunctuation: true }));
+    if (!sort) setSort(true);
+    if (col === 'phone') {
+      if (order === Order.ASC) {
+        const sorted = [...countries].sort(
+          (a, b) => parseInt(a[col]) - parseInt(b[col])
+        );
         setListCountries(sorted);
         setOrder(Order.DSC);
       }
-      if(order === Order.DSC){
-        const sorted = [...countries].sort( (a, b) => b[col].localeCompare(a[col], 'fr', { ignorePunctuation: true }));
+      if (order === Order.DSC) {
+        const sorted = [...countries].sort(
+          (a, b) => parseInt(b[col]) - parseInt(a[col])
+        );
+        setListCountries(sorted);
+        setOrder(Order.ASC);
+      }
+    } else {
+      if (order === Order.ASC) {
+        const sorted = [...countries].sort((a, b) =>
+          a[col].localeCompare(b[col], 'fr', { ignorePunctuation: true })
+        );
+        setListCountries(sorted);
+        setOrder(Order.DSC);
+      }
+      if (order === Order.DSC) {
+        const sorted = [...countries].sort((a, b) =>
+          b[col].localeCompare(a[col], 'fr', { ignorePunctuation: true })
+        );
         setListCountries(sorted);
         setOrder(Order.ASC);
       }
     }
-    
   };
 
   const getUserCountries = () => {
-    if (userCountries > amountCountries) return amountCountries
-    else return userCountries
-  }
+    if (userCountries > amountCountries) return amountCountries;
+    else return userCountries;
+  };
 
-  const amountPages = useMemo(() =>
-    amountCountries % getUserCountries() === 0
-      ? Math.floor(amountCountries / getUserCountries())
-      : Math.floor(amountCountries / getUserCountries()) + 1,[amountCountries,getUserCountries()]);
+  const amountPages = useMemo(
+    () =>
+      amountCountries % getUserCountries() === 0
+        ? Math.floor(amountCountries / getUserCountries())
+        : Math.floor(amountCountries / getUserCountries()) + 1,
+    [amountCountries, getUserCountries()]
+  );
 
-  const pagesTab:number[] = useMemo(() => {
-    const result:number[] = [];
-    for (let i = 0; i < amountPages ; i++) {
-      result[i] = i+1
+  const pagesTab: number[] = useMemo(() => {
+    const result: number[] = [];
+    for (let i = 0; i < amountPages; i++) {
+      result[i] = i + 1;
     }
     return result;
   }, [amountPages]);
@@ -111,27 +116,45 @@ export default function CountriesList() {
         </span>
         <select onChange={(e) => setContinentCode(e.target.value)}>
           {continents.map((continent) => (
-            <option
-              key={continent.value}
-              value={continent.value}
-            >
+            <option key={continent.value} value={continent.value}>
               {continent.label}
             </option>
           ))}
         </select>
-        <button onClick={function(){ fetchData(1); setSort(false)}}> Wyślij </button>
+        <button
+          onClick={function () {
+            fetchData(1);
+            setSort(false);
+          }}
+        >
+          {' '}
+          Wyślij{' '}
+        </button>
       </div>
-      {continents.map(item => (
-        code === item.value ? <p>Obecnie wyszukujesz fraze dla: <b>{item.label}</b></p> : null
-      ))}
+      {continents.map((item) =>
+        code === item.value ? (
+          <p>
+            Obecnie wyszukujesz fraze dla: <b>{item.label}</b>
+          </p>
+        ) : null
+      )}
       <table>
         <thead>
           <tr>
-          {sortingList.map((tuple) => (
-            <th key={tuple.col} className={tuple.class} onClick={() => sorting(tuple.col, countries)}>
-            {tuple.name} {order === 0 ? <BiChevron isUp={true} /> : <BiChevron isUp={false} />}{' '}
-            </th>
-           ))}
+            {sortingList.map((tuple) => (
+              <th
+                key={tuple.col}
+                className={tuple.class}
+                onClick={() => sorting(tuple.col, countries)}
+              >
+                {tuple.name}{' '}
+                {order === 0 ? (
+                  <BiChevron isUp={true} />
+                ) : (
+                  <BiChevron isUp={false} />
+                )}{' '}
+              </th>
+            ))}
           </tr>
         </thead>
         {sort

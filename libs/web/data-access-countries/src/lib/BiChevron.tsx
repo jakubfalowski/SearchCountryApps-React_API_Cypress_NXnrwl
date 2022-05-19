@@ -1,11 +1,10 @@
-
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 
 interface iconType {
-    isUp: boolean;
+  isUp: boolean;
 }
 export function BiChevron(props: iconType) {
-    return(props.isUp === true ? <BiChevronUp /> : <BiChevronDown />)
-  }
+  return props.isUp === true ? <BiChevronUp /> : <BiChevronDown />;
+}
 
-  export default BiChevron;
+export default BiChevron;

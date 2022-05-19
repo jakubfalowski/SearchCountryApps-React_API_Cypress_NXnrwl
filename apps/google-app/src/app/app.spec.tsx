@@ -16,7 +16,7 @@ describe('App', () => {
   });
 
   it('4 dodać 6 powinno być większe od 7', () => {
-    function sum(a:number, b:number) {
+    function sum(a: number, b: number) {
       return a + b;
     }
     expect(sum(4, 6)).toBeGreaterThan(7);

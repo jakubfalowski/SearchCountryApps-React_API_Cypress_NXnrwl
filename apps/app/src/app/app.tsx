@@ -5,14 +5,13 @@ import {
   InMemoryCache,
   ApolloProvider,
   useQuery,
-  gql
-} from "@apollo/client";
-
+  gql,
+} from '@apollo/client';
 
 export function App() {
   const client = new ApolloClient({
     uri: 'https://countries.trevorblades.com/graphql',
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
   });
 
   return (

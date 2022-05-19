@@ -18,7 +18,7 @@ const key2 = 'AIzaSyB45fm5hOp9Fpm-1z9ACUfrLVLQKTuMWBY';
 const key3 = 'AIzaSyARjbtgeF4C3dPCXNyGmnVhgGqiUmCTqCI';
 const key4 = 'AIzaSyBCnKX-ObOWhYFN5XO7-EgaeuAOWMhtOsw';
 const key5 = 'AIzaSyBffbK0spqz_ksvT_p9L-NsAkWtUcYljrk';
-const fetchURL = `https://www.googleapis.com/customsearch/v1?key=${key1}&cx=017576662512468239146:omuauf_lfve&q=`;
+const fetchURL = `https://www.googleapis.com/customsearch/v1?key=${key2}&cx=017576662512468239146:omuauf_lfve&q=`;
 const colorsCopy = [200, 0, 100];
 
 
@@ -33,14 +33,6 @@ export function SelectIndex() {
     parseInt(totalResults[0]) +
     parseInt(totalResults[1]) +
     parseInt(totalResults[2]);
-
-    // const amountPages = useMemo(
-    //   () =>
-    //     amountCountries % getUserCountries() === 0
-    //       ? Math.floor(amountCountries / getUserCountries())
-    //       : Math.floor(amountCountries / getUserCountries()) + 1,
-    //   [amountCountries, getUserCountries()]
-    // );
 
   const fetchResults = async (numberOfQueries: number) => {
     const response = [];

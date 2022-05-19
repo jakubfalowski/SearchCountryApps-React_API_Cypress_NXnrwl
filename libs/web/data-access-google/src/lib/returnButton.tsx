@@ -1,18 +1,20 @@
-import { Button} from '@mantine/core';
+import { Button, Grid} from '@mantine/core';
 import hslToColorName from './hslToColorName';
 
 export function ReturnButton(i:number, colors:any, query:any){
-    if(query.employees !== undefined){
+    if(query[0] !== undefined){
         return [...Array(i).keys()].map(index => {
         return(
-            <Button
-                color={hslToColorName(colors[index])}
-                key={index}
-            >
-                {index+1} : {query.employees !== undefined && query?.employees[index].name}
-            </Button>
+            <Grid.Col md={12/i} sm={8} xs={12} key={index}>
+                <Button
+                    color={hslToColorName(colors[index])}
+                    key={index}
+                >
+                    {index+1} : {query[index].name !== undefined && query[index].name}
+                </Button>
+            </Grid.Col>
         )
         })
     }
-    else return <p> Brak wpisanego zapytania </p>
+    else return null
   }

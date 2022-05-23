@@ -18,7 +18,7 @@ const key2 = 'AIzaSyB45fm5hOp9Fpm-1z9ACUfrLVLQKTuMWBY';
 const key3 = 'AIzaSyARjbtgeF4C3dPCXNyGmnVhgGqiUmCTqCI';
 const key4 = 'AIzaSyBCnKX-ObOWhYFN5XO7-EgaeuAOWMhtOsw';
 const key5 = 'AIzaSyBffbK0spqz_ksvT_p9L-NsAkWtUcYljrk';
-const fetchURL = `https://www.googleapis.com/customsearch/v1?key=${key2}&cx=017576662512468239146:omuauf_lfve&q=`;
+const fetchURL = `https://www.googleapis.com/customsearch/v1?key=${key5}&cx=017576662512468239146:omuauf_lfve&q=`;
 const colorsCopy = [200, 0, 100];
 
 
@@ -61,6 +61,7 @@ export function SelectIndex() {
           <TextInput
             required
             label={`Zapytanie nr. ${index + 1}`}
+            className={`input${index}`}
             placeholder="google query"
             {...form.getListInputProps('employees', index, 'name')}
           />
@@ -141,9 +142,9 @@ export function SelectIndex() {
   const form = useForm({
     initialValues: {
       employees: formList([
-        { name: 'france' },
-        { name: 'poland' },
-        { name: 'england' },
+        { name: '' },
+        { name: '' },
+        { name: '' },
       ]),
     },
   });
@@ -158,7 +159,7 @@ export function SelectIndex() {
           <Grid className="inputContainer container center">
             {returnInput(3)}
             <Grid.Col md={4} sm={8} xs={12} className="center">
-              <Button color="violet" type="submit">
+              <Button color="violet" type="submit" className='submitInput'>
                 Wyślij hasła
               </Button>
             </Grid.Col>
@@ -175,6 +176,7 @@ export function SelectIndex() {
                 <Button
                   color="violet"
                   type="submit"
+                  className='submitButtons'
                   onClick={() => fetchResults(3)}
                 >
                   Wyszukaj

@@ -18,11 +18,8 @@ describe('app2', () => {
       })
     }
     
-    if(allPercent !== undefined) {
-      expect(allPercent).to.equal(100);
-      
-    }
-    
+    if(allPercent !== undefined) expect(allPercent).to.equal(100);
+
   });
   
   it('Info about queries visible ', () => {

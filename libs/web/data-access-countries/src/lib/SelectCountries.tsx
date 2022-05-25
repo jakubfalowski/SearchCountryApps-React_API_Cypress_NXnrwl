@@ -3,7 +3,6 @@ export function SelectCountries(
   userCountries: number,
   page: any
 ) {
-  console.log(countries);
   return (
     <tbody>
       {countries

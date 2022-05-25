@@ -1,6 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
 
 import { continentsQuery } from './ContinentsQuery';
 import { SelectCountries } from './SelectCountries';
@@ -26,11 +25,6 @@ export default function CountriesList() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ query: continentsQuery(continentCode) }),
   };
-
-  // const { loading, error, data } = useQuery(continentsQuery(continentCode));
-
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Error :(</p>;
 
   const fetchData = async (pageNumber: string | number) => {
     navigate(`/${continentCode}/${pageNumber}`);
@@ -99,6 +93,7 @@ export default function CountriesList() {
     return result;
   }, [amountPages]);
 
+
   return (
     <div>
       <div className="header">
@@ -109,10 +104,10 @@ export default function CountriesList() {
             type="number"
             min="5"
             max={amountCountries}
-            value={getUserCountries()}
+            value={userCountries}
             onChange={(e) => setUserCountries(e.target.valueAsNumber)}
           />{' '}
-          {getUserCountries()}/{amountCountries} krotek
+         <span className='userCountries'>{getUserCountries()}</span>/<span className='amountCountries'>{amountCountries}</span>  krotek
         </span>
         <select onChange={(e) => setContinentCode(e.target.value)}>
           {continents.map((continent) => (

@@ -1,6 +1,4 @@
-import { gql } from '@apollo/client';
-
-export const continentsQuery = (codeContinent: string) => gql`{
+export const continentsQuery = (codeContinent: string) => `{
     continent(code:"${codeContinent}"){
       code
       name

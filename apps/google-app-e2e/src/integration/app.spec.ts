@@ -1,13 +1,10 @@
-describe('app2', () => {
+import {selectDataGoogle} from "../support/app.po"
+describe('google-app', () => {
   beforeEach(() => cy.visit('/', { failOnStatusCode: false }));
 
   it('Chart visible ', () => {
-    const input = ['rzeszow', 'lublin', 'kielce']
-    cy.get('.input0').type(input[0]);
-    cy.get('.input1').type(input[1]);
-    cy.get('.input2').type(input[2]);
-    cy.get('.submitInput').click();
-    cy.get('.submitButtons').click();
+    const input = ['rzeszow','lublin','kielce'];
+    selectDataGoogle(input)
     let allPercent;
 
     for(let i = 0; i < input.length; i++){
@@ -22,11 +19,8 @@ describe('app2', () => {
   });
   
   it('Info about queries visible ', () => {
-    cy.get('.input0').type('poland');
-    cy.get('.input1').type('france');
-    cy.get('.input2').type('italy');
-    cy.get('.submitInput').click();
-    cy.get('.submitButtons').click();
+    const input = ['poland','france','italy'];
+    selectDataGoogle(input)
 
     cy.get('tspan').then(($amount) => {
       let amountResults = 0;

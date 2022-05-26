@@ -93,7 +93,7 @@ export default function CountriesList() {
     return result;
   }, [amountPages]);
 
-
+  console.log(countries)
   return (
     <div>
       <div className="header">

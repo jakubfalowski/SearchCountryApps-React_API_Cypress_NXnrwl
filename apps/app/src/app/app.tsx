@@ -1,12 +1,15 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.css';
-import NxWelcome from './nx-welcome';
+import { CountryApp } from '@app/web/data-access-countries';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 export function App() {
+
   return (
-    <div>
-      <NxWelcome title="app" />
-      </div>
+      <Router>
+        <Routes>
+          <Route path={'/'} element={<CountryApp />} />
+          <Route path={'/:code/:page'} element={<CountryApp />} />
+        </Routes>
+      </Router>
   );
 }
 

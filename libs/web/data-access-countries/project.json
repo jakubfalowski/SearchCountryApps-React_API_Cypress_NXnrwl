@@ -1,0 +1,25 @@
+{
+  "root": "libs/web/data-access-countries",
+  "sourceRoot": "libs/web/data-access-countries/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/data-access-countries/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/data-access-countries"],
+      "options": {
+        "jestConfig": "libs/web/data-access-countries/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

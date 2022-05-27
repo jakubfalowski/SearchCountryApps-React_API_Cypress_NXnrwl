@@ -16,7 +16,6 @@
         "polyfills": "apps/app/src/polyfills.ts",
         "tsConfig": "apps/app/tsconfig.app.json",
         "assets": ["apps/app/src/favicon.ico", "apps/app/src/assets"],
-        "styles": ["apps/app/src/styles.css"],
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"
       },
@@ -66,5 +65,5 @@
       }
     }
   },
-  "tags": []
+  "sourceTag": "scope:client"
 }

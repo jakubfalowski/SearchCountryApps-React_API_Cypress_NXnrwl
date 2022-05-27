@@ -15,7 +15,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@app/header": ["libs/header/src/index.ts"]
+      "@app/web": ["libs/web/src/index.ts"],
+      "@app/web/data-access-countries": [
+        "libs/web/data-access-countries/src/index.ts"
+      ],
+      "@app/web/data-access-google": [
+        "libs/web/data-access-google/src/index.ts"
+      ],
+      "@app/web/ui-header": ["libs/web/ui-header/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

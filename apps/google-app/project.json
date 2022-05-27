@@ -1,0 +1,73 @@
+{
+  "root": "apps/google-app",
+  "sourceRoot": "apps/google-app/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/google-app",
+        "index": "apps/google-app/src/index.html",
+        "baseHref": "/",
+        "main": "apps/google-app/src/main.tsx",
+        "polyfills": "apps/google-app/src/polyfills.ts",
+        "tsConfig": "apps/google-app/tsconfig.app.json",
+        "assets": [
+          "apps/google-app/src/favicon.ico",
+          "apps/google-app/src/assets"
+        ],
+        "styles": ["apps/google-app/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/google-app/src/environments/environment.ts",
+              "with": "apps/google-app/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "google-app:build",
+        "hmr": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "google-app:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/google-app/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/google-app"],
+      "options": {
+        "jestConfig": "apps/google-app/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

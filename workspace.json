@@ -3,9 +3,11 @@
   "projects": {
     "app": "apps/app",
     "app-e2e": "apps/app-e2e",
-    "app2": "apps/app2",
-    "app2-e2e": "apps/app2-e2e",
-    "header": "libs/header",
-    "header-e2e": "apps/header-e2e"
+    "google-app": "apps/google-app",
+    "google-app-e2e": "apps/google-app-e2e",
+    "web": "libs/web",
+    "web-data-access-countries": "libs/web/data-access-countries",
+    "web-data-access-google": "libs/web/data-access-google",
+    "web-ui-header": "libs/web/ui-header"
   }
 }
